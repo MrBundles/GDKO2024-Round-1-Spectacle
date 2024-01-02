@@ -13,3 +13,7 @@ config_version=5
 config/name="GDKO 2024-round-1-spectacle"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
+
+[editor]
+
+script/templates_search_path="res://assets/code/script_templates"
