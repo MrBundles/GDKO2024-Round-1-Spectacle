@@ -1,6 +1,6 @@
 #@tool
 #class_name name_of_class
-extends Node2D
+extends Control
 
 # purpose: This node will always be present in the scene tree and will handle the loading and unloading of all scenes during gameplay.
 
@@ -16,8 +16,6 @@ extends Node2D
 # main functions ---------------------------------------------------------------------------------------------------------
 func _ready():
 	# connect signals
-	
-	# initialize setgets
 	
 	# initialize variables
 	

@@ -17,8 +17,6 @@ extends Node
 func _ready():
 	# connect signals
 	
-	# initialize setgets
-	
 	# initialize variables
 	
 	# call functions

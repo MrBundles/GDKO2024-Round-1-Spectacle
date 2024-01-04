@@ -7,6 +7,7 @@ font = ExtResource("1_s30ex")
 font_size = 72
 
 [node name="Menu" type="Control"]
+custom_minimum_size = Vector2(960, 540)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
