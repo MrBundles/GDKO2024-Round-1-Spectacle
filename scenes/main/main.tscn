@@ -11,7 +11,9 @@ noise = SubResource("FastNoiseLite_6da4u")
 [sub_resource type="ViewportTexture" id="ViewportTexture_nm5hn"]
 viewport_path = NodePath("Control/SubViewportContainer/SubViewport")
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_eluy0")
 
 [node name="Control" type="Control" parent="."]
@@ -105,9 +107,11 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 1, 1)
 
-[node name="WindowViewport" type="Polygon2D" parent="."]
-position = Vector2(-256, -16)
+[node name="Spectacle" type="Polygon2D" parent="."]
+position = Vector2(-88, -48)
 texture = SubResource("ViewportTexture_nm5hn")
-texture_offset = Vector2(-128, -8)
-polygon = PackedVector2Array(400, 344, 576, 280, 776, 440, 624, 632, 424, 616, 344, 464)
+texture_offset = Vector2(-88, -48)
+polygon = PackedVector2Array(400, 344, 608, 72, 1072, 264, 624, 632, 424, 616, 344, 464)
 script = ExtResource("2_05bbm")
+
+[node name="UI" type="CanvasLayer" parent="."]
