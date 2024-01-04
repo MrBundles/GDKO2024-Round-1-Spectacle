@@ -1,8 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://rg41n31sihgf"]
+[gd_scene load_steps=6 format=3 uid="uid://rg41n31sihgf"]
 
 [ext_resource type="Script" path="res://scenes/main/main.gd" id="1_eluy0"]
+[ext_resource type="Script" path="res://scenes/main/WindowViewport.gd" id="2_05bbm"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_fmhh3"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6da4u"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f3ef6"]
+noise = SubResource("FastNoiseLite_6da4u")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nm5hn"]
 viewport_path = NodePath("Control/SubViewportContainer/SubViewport")
 
 [node name="Main" type="Node2D"]
@@ -30,6 +36,7 @@ size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
 [node name="Red" type="ColorRect" parent="Control/SubViewportContainer/SubViewport"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -37,14 +44,22 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 1)
 
+[node name="TextureRect" type="TextureRect" parent="Control/SubViewportContainer/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("NoiseTexture2D_f3ef6")
+
 [node name="SubViewportContainer2" type="SubViewportContainer" parent="Control"]
 layout_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -136.0
-offset_top = 112.0
-offset_right = -136.0
-offset_bottom = 112.0
+offset_left = -1352.0
+offset_top = 584.0
+offset_right = -1352.0
+offset_bottom = 584.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
@@ -68,10 +83,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 192.0
-offset_top = 208.0
-offset_right = 192.0
-offset_bottom = 208.0
+offset_left = 80.0
+offset_top = 600.0
+offset_right = 80.0
+offset_bottom = 600.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch = true
@@ -91,7 +106,8 @@ grow_vertical = 2
 color = Color(0, 0, 1, 1)
 
 [node name="WindowViewport" type="Polygon2D" parent="."]
-position = Vector2(-288, -200)
-scale = Vector2(1.48148, 1.29545)
-texture = SubResource("ViewportTexture_fmhh3")
+position = Vector2(-256, -16)
+texture = SubResource("ViewportTexture_nm5hn")
+texture_offset = Vector2(-128, -8)
 polygon = PackedVector2Array(400, 344, 576, 280, 776, 440, 624, 632, 424, 616, 344, 464)
+script = ExtResource("2_05bbm")
