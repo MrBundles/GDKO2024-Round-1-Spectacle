@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpkkda8x5qtqr"]
+
+[ext_resource type="PackedScene" uid="uid://bcaqs56imejck" path="res://scenes/menu/menu.tscn" id="1_1434h"]
+[ext_resource type="FontFile" uid="uid://q6oqiulieari" path="res://assets/graphics/fonts/roboto/Roboto-Bold.ttf" id="2_ds235"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_kknyn"]
+font = ExtResource("2_ds235")
+font_size = 48
+
+[node name="MenuGame" instance=ExtResource("1_1434h")]
+
+[node name="Label" parent="MarginContainer/VBoxContainer" index="0"]
+text = "Level 00"
+label_settings = SubResource("LabelSettings_kknyn")
+horizontal_alignment = 0

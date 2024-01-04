@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq3wn4pm2oaqo"]
+
+[ext_resource type="PackedScene" uid="uid://bcaqs56imejck" path="res://scenes/menu/menu.tscn" id="1_0jtca"]
+[ext_resource type="FontFile" uid="uid://q6oqiulieari" path="res://assets/graphics/fonts/roboto/Roboto-Bold.ttf" id="2_3lsht"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_qcuab"]
+font = ExtResource("2_3lsht")
+font_size = 112
+
+[node name="MenuMain" instance=ExtResource("1_0jtca")]
+
+[node name="Label" parent="MarginContainer/VBoxContainer" index="0"]
+text = "Spect-Ocular"
+label_settings = SubResource("LabelSettings_qcuab")

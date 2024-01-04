@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dtki8fd31q7t0"]
+
+[ext_resource type="PackedScene" uid="uid://bcaqs56imejck" path="res://scenes/menu/menu.tscn" id="1_im58g"]
+
+[node name="MenuLevels" instance=ExtResource("1_im58g")]
+
+[node name="Label" parent="MarginContainer/VBoxContainer" index="0"]
+text = "Level Select"
