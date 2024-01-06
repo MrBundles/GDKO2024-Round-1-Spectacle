@@ -11,6 +11,8 @@ extends Polygon2D
 # constants --------------------------------------------------------------------------------------------------------------
 
 # variables --------------------------------------------------------------------------------------------------------------
+@export_node_path("SubViewport") var viewport_path
+
 @export_group("polygon values")
 @export var node_count = 16 : set = set_node_count
 @export var shape_radius = 32 : set = set_shape_radius
@@ -18,19 +20,19 @@ var polygon_points = []
 
 @export_group("spectacle values")
 @export var rim_thickness = 8
+@export var active = false : set = set_active
 
-@export_group("viewport values")
-@export_node_path("SubViewport") var viewport_path
+
 
 # main functions ---------------------------------------------------------------------------------------------------------
 func _ready():
 	# connect signals
+	gSignals.refresh_viewport_textures.connect(refresh_viewport_textures)
 	
 	# initialize variables
 	
 	# call functions
 	generate_polygon()
-	update_texture()
 
 
 func _process(delta):
@@ -56,13 +58,6 @@ func generate_polygon():
 	set_polygon(PackedVector2Array(polygon_points))
 
 
-func update_texture():
-	if not viewport_path:
-		return
-	await RenderingServer.frame_post_draw
-	texture = get_node(viewport_path).get_texture()
-
-
 # set/get functions -------------------------------------------------------------------------------------------------------
 func set_node_count(new_val):
 	node_count = new_val
@@ -72,7 +67,12 @@ func set_shape_radius(new_val):
 	shape_radius = new_val
 	generate_polygon()
 
+func set_active(new_val):
+	active = new_val
+
 
 # signal functions --------------------------------------------------------------------------------------------------------
-
+func refresh_viewport_textures():
+	var viewport :SubViewport = get_node(viewport_path)
+	texture = viewport.get_texture()
 

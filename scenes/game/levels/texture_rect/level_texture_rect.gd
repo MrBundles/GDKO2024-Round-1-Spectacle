@@ -1,6 +1,6 @@
 @tool
 #class_name name_of_class
-extends Node
+extends TextureRect
 
 # purpose: 
 
@@ -11,31 +11,33 @@ extends Node
 # constants --------------------------------------------------------------------------------------------------------------
 
 # variables --------------------------------------------------------------------------------------------------------------
-@export_group("layer values")
-@export var active_layer_id = 0 : set = set_active_layer_id
+@export_group("viewport values")
+@export_node_path("SubViewport") var viewport_path
+
 
 # main functions ---------------------------------------------------------------------------------------------------------
 func _ready():
 	# connect signals
+	gSignals.refresh_viewport_textures.connect(refresh_viewport_textures)
 	
 	# initialize variables
 	
 	# call functions
-	gSignals.refresh_viewport_textures.emit()
+	pass
+
 
 func _process(delta):
-	if Engine.is_editor_hint():
-		gSignals.refresh_viewport_textures.emit()
+	pass
 
 
 # helper functions --------------------------------------------------------------------------------------------------------
 
 
 # set/get functions -------------------------------------------------------------------------------------------------------
-func set_active_layer_id(new_val):
-	active_layer_id = new_val
 
 
 # signal functions --------------------------------------------------------------------------------------------------------
-
-
+func refresh_viewport_textures():
+	if not viewport_path: return
+	var viewport :SubViewport = get_node(viewport_path)
+	texture = viewport.get_texture()

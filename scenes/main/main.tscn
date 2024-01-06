@@ -15,5 +15,6 @@ metadata/_edit_lock_ = true
 [node name="Game" type="Node2D" parent="."]
 
 [node name="Level" parent="Game" instance=ExtResource("2_p3sva")]
+active_layer_id = null
 
 [node name="UI" type="CanvasLayer" parent="."]
