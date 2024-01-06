@@ -4,10 +4,10 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_ggf1c"]
 font = ExtResource("1_s30ex")
-font_size = 72
+font_size = 112
 
 [node name="Menu" type="Control"]
-custom_minimum_size = Vector2(960, 540)
+custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

@@ -49,7 +49,6 @@ func generate_polygon():
 		var node_angle = deg_to_rad(360 / node_count * i)
 		polygon_points.append(Vector2(shape_radius, 0).rotated(node_angle))
 	
-	print("polygon_points: %s" % [polygon_points])
 	set_polygon(PackedVector2Array(polygon_points))
 
 
