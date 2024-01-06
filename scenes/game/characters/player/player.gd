@@ -21,9 +21,14 @@ extends CharacterBody2D
 @export var down_vel_max = 100.0
 var jump_cancel_flag = true
 
+@export_group("color values")
+@export var layer_colors : Array[Color] = []
+
+
 # main functions ---------------------------------------------------------------------------------------------------------
 func _ready():
 	# connect signals
+	gSignals.start_layer_transition.connect(on_start_layer_transition)
 	
 	# initialize variables
 	
@@ -83,5 +88,6 @@ func get_input(delta):
 
 
 # signal functions --------------------------------------------------------------------------------------------------------
-
+func on_start_layer_transition(new_layer_id):
+	var tween = get_tree().create_tween()
 

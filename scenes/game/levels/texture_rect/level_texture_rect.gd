@@ -45,7 +45,6 @@ func refresh_viewport_textures():
 
 
 func finish_layer_transition(new_layer_id):
-	print(new_layer_id)
 	if new_layer_id == layer_id:
 		show()
 	else:

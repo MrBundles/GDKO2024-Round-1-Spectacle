@@ -12,7 +12,7 @@ extends Polygon2D
 
 # variables --------------------------------------------------------------------------------------------------------------
 @export_node_path("SubViewport") var viewport_path
-@export var new_layer_id = 0
+@export var layer_id = 0
 
 @export_group("color values")
 @export var layer_colors : Array[Color] = []
@@ -27,6 +27,8 @@ var polygon_points = []
 @export var rim_thickness = 8
 @export var active = false : set = set_active
 
+@export_group("tween values")
+var transition_tween : Tween
 
 
 # main functions ---------------------------------------------------------------------------------------------------------
@@ -50,7 +52,7 @@ func _draw():
 		return
 	var outline_points = polygon_points.duplicate()
 	outline_points.append(polygon_points[0])
-	draw_polyline(PackedVector2Array(outline_points), layer_colors[new_layer_id].darkened(.25), rim_thickness, true)
+	draw_polyline(PackedVector2Array(outline_points), layer_colors[layer_id].darkened(.25), rim_thickness, true)
 
 
 # helper functions --------------------------------------------------------------------------------------------------------
@@ -64,7 +66,7 @@ func generate_polygon():
 
 
 func finish_layer_transition():
-	gSignals.finish_layer_transition.emit(new_layer_id)
+	gSignals.finish_layer_transition.emit(layer_id)
 	shape_radius = initial_shape_radius
 	active = false
 	$Area2D.monitoring = true
@@ -94,16 +96,19 @@ func set_shape_radius(new_val):
 
 
 func set_active(new_val):
+	if new_val == active: return
+	
 	active = new_val
 	
 	if not active: return
 	
-	gSignals.start_layer_transition.emit(new_layer_id)
+	gSignals.start_layer_transition.emit(layer_id)
+	print("starting layer transition: layer %s" % [layer_id])
 	$Area2D.monitoring = false
-	var tween = get_tree().create_tween()
+	transition_tween = create_tween()
 	var tween_duration = 1.5
-	tween.tween_property(self, "shape_radius", 2500, tween_duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
-	tween.tween_callback(finish_layer_transition)
+	transition_tween.tween_property(self, "shape_radius", 2500, tween_duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	transition_tween.tween_callback(finish_layer_transition)
 
 
 # signal functions --------------------------------------------------------------------------------------------------------
@@ -116,4 +121,5 @@ func refresh_viewport_textures():
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("player") and not active:
+		print("set active to true")
 		active = true

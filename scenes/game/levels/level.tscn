@@ -6,21 +6,21 @@
 [ext_resource type="PackedScene" uid="uid://g8gp7ghxbk06" path="res://scenes/game/objects/spectacle/spectacle.tscn" id="2_lwxn8"]
 [ext_resource type="PackedScene" uid="uid://b4y7cipya3vxn" path="res://scenes/game/characters/player/player.tscn" id="3_vi25t"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_tw5dv"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_e04lf"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_1skn4"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_qpwt1"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_dypav"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_0ovnp"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_yx2w5"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_tt0a6"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_e46el")
-active_layer_id = 1
+active_layer_id = 4
 
 [node name="Layers" type="Control" parent="."]
 custom_minimum_size = Vector2(1920, 1080)
@@ -31,29 +31,29 @@ offset_bottom = 1080.0
 metadata/_edit_lock_ = true
 
 [node name="TextureRectLayer1" parent="Layers" instance=ExtResource("2_cjah4")]
+visible = false
 layout_mode = 1
-texture = SubResource("ViewportTexture_tw5dv")
+texture = SubResource("ViewportTexture_e04lf")
 viewport_path = NodePath("../../Layer1/SubViewport")
 layer_id = 1
 
 [node name="TextureRectLayer2" parent="Layers" instance=ExtResource("2_cjah4")]
 visible = false
 layout_mode = 1
-texture = SubResource("ViewportTexture_1skn4")
+texture = SubResource("ViewportTexture_qpwt1")
 viewport_path = NodePath("../../Layer2/SubViewport")
 layer_id = 2
 
 [node name="TextureRectLayer3" parent="Layers" instance=ExtResource("2_cjah4")]
 visible = false
 layout_mode = 1
-texture = SubResource("ViewportTexture_dypav")
+texture = SubResource("ViewportTexture_0ovnp")
 viewport_path = NodePath("../../Layer3/SubViewport")
 layer_id = 3
 
 [node name="TextureRectLayer4" parent="Layers" instance=ExtResource("2_cjah4")]
-visible = false
 layout_mode = 1
-texture = SubResource("ViewportTexture_yx2w5")
+texture = SubResource("ViewportTexture_tt0a6")
 viewport_path = NodePath("../../Layer4/SubViewport")
 layer_id = 4
 
@@ -65,9 +65,11 @@ gravity = 3000.0
 jump = 75000.0
 up_vel_max = 100000.0
 down_vel_max = 100000.0
+layer_colors = Array[Color]([Color(1, 1, 1, 1), Color(0.0666667, 0.541176, 0.698039, 1), Color(1, 0.819608, 0.4, 1), Color(0.0235294, 0.839216, 0.627451, 1), Color(0.937255, 0.278431, 0.435294, 1)])
 
 [node name="Layer1" parent="." instance=ExtResource("1_pyusk")]
 layer = 3
+visible = false
 layer_id = 1
 
 [node name="ModulateTarget" parent="Layer1" index="1"]
@@ -78,11 +80,11 @@ layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608,
 
 [node name="Spectacle" parent="Layer1" instance=ExtResource("2_lwxn8")]
 position = Vector2(640, 384)
-texture = SubResource("ViewportTexture_yx2w5")
+texture = SubResource("ViewportTexture_tt0a6")
 texture_offset = Vector2(640, 384)
 polygon = PackedVector2Array(32, 0, 30.4502, 9.83803, 25.9508, 18.7231, 18.9378, 25.7946, 10.0903, 30.3675, 0.265479, 31.9989, -9.58507, 30.5307, -18.5072, 26.1053, -25.6366, 19.1511, -30.2828, 10.3419, -31.9956, 0.530941, -30.6092, -9.33145, -26.2579, -18.29, -19.3631, -25.4768, -10.5928, -30.1959, -0.796365, -31.9901, 9.07719, -30.6856, 18.0715, -26.4087, 25.3153, -19.5738, 30.107, -10.8429, 31.9824, -1.06173)
 viewport_path = NodePath("../../Layer4/SubViewport")
-new_layer_id = 4
+layer_id = 4
 initial_shape_radius = 32
 shape_radius = 32
 
@@ -107,7 +109,6 @@ layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608,
 
 [node name="Layer4" parent="." instance=ExtResource("1_pyusk")]
 layer = 3
-visible = false
 layer_id = 4
 
 [node name="ModulateTarget" parent="Layer4" index="1"]
@@ -118,11 +119,11 @@ layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608,
 
 [node name="Spectacle2" parent="Layer4" instance=ExtResource("2_lwxn8")]
 position = Vector2(576, 576)
-texture = SubResource("ViewportTexture_tw5dv")
+texture = SubResource("ViewportTexture_e04lf")
 texture_offset = Vector2(576, 576)
 polygon = PackedVector2Array(32, 0, 30.4502, 9.83803, 25.9508, 18.7231, 18.9378, 25.7946, 10.0903, 30.3675, 0.265479, 31.9989, -9.58507, 30.5307, -18.5072, 26.1053, -25.6366, 19.1511, -30.2828, 10.3419, -31.9956, 0.530941, -30.6092, -9.33145, -26.2579, -18.29, -19.3631, -25.4768, -10.5928, -30.1959, -0.796365, -31.9901, 9.07719, -30.6856, 18.0715, -26.4087, 25.3153, -19.5738, 30.107, -10.8429, 31.9824, -1.06173)
 viewport_path = NodePath("../../Layer1/SubViewport")
-new_layer_id = 1
+layer_id = 1
 initial_shape_radius = 32
 shape_radius = 32
 
