@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbq5duc4x5e7i"]
+[gd_scene load_steps=6 format=3 uid="uid://bbq5duc4x5e7i"]
 
 [ext_resource type="PackedScene" uid="uid://lsmndfoik8sr" path="res://scenes/main/tilemap/main_tilemap.tscn" id="1_poxqg"]
+[ext_resource type="PackedScene" uid="uid://d2nmva7qrit4j" path="res://scenes/game/levels/subviewport/layer_subviewport.tscn" id="1_wepft"]
 [ext_resource type="PackedScene" uid="uid://g8gp7ghxbk06" path="res://scenes/game/objects/spectacle/spectacle.tscn" id="2_lwxn8"]
+[ext_resource type="PackedScene" uid="uid://b4y7cipya3vxn" path="res://scenes/game/characters/player/player.tscn" id="3_vi25t"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_h21m1"]
-viewport_path = NodePath("Layers/CurrentMenuSubviewportContainer/SubViewport")
+[sub_resource type="ViewportTexture" id="ViewportTexture_nbtcd"]
+viewport_path = NodePath("Layers/PreviewMenuSubviewportContainer/LayerSubViewport")
 
 [node name="Level" type="Node2D"]
 
@@ -16,7 +18,6 @@ offset_right = 1344.0
 offset_bottom = 832.0
 
 [node name="PreviewMenuSubviewportContainer" type="SubViewportContainer" parent="Layers"]
-visible = false
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 1
 anchors_preset = 15
@@ -27,17 +28,13 @@ grow_vertical = 2
 stretch = true
 metadata/_edit_lock_ = true
 
-[node name="SubViewport" type="SubViewport" parent="Layers/PreviewMenuSubviewportContainer"]
-disable_3d = true
-handle_input_locally = false
-size = Vector2i(1920, 1080)
-render_target_update_mode = 0
+[node name="LayerSubViewport" parent="Layers/PreviewMenuSubviewportContainer" instance=ExtResource("1_wepft")]
+render_target_update_mode = 4
 
-[node name="LevelTilemap" parent="Layers/PreviewMenuSubviewportContainer/SubViewport" instance=ExtResource("1_poxqg")]
+[node name="LevelTilemap" parent="Layers/PreviewMenuSubviewportContainer/LayerSubViewport" instance=ExtResource("1_poxqg")]
 layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608, 1, 0, 262144, 1, 0, 327680, 1, 0, 393216, 1, 0, 458752, 1, 0, 524288, 1, 0, 589824, 1, 0, 655360, 1, 0, 720896, 1, 0, 786432, 1, 0, 851968, 1, 0, 917504, 1, 0, 983040, 1, 0, 1048576, 1, 0, 1048577, 1, 0, 1048578, 1, 0, 1048579, 1, 0, 1048580, 1, 0, 1048581, 1, 0, 1048582, 1, 0, 1048583, 1, 0, 1048584, 1, 0, 1048585, 1, 0, 1048586, 1, 0, 1048587, 1, 0, 1048588, 1, 0, 1048589, 1, 0, 1048590, 1, 0, 1048591, 1, 0, 1048592, 1, 0, 1048593, 1, 0, 1048594, 1, 0, 1048595, 1, 0, 1048596, 1, 0, 1048597, 1, 0, 1048598, 1, 0, 1048599, 1, 0, 1048600, 1, 0, 1048601, 1, 0, 1048602, 1, 0, 1048603, 1, 0, 1048604, 1, 0, 1048605, 1, 0, 983069, 1, 0, 917533, 1, 0, 851997, 1, 0, 786461, 1, 0, 720925, 1, 0, 655389, 1, 0, 589853, 1, 0, 524317, 1, 0, 458781, 1, 0, 393245, 1, 0, 327709, 1, 0, 262173, 1, 0, 196637, 1, 0, 131101, 1, 0, 65565, 1, 0, 29, 1, 0, 851969, 1, 0, 851970, 1, 0, 851971, 1, 0, 851972, 1, 0, 851973, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 1, 0, 458768, 1, 0, 458769, 1, 0, 458770, 1, 0, 458771, 1, 0, 655376, 1, 0, 655377, 1, 0, 720913, 1, 0, 720914, 1, 0, 720915, 1, 0, 720916, 1, 0, 917520, 1, 0, 917521, 1, 0, 917522, 1, 0, 917523, 1, 0, 917524, 1, 0, 262170, 1, 0, 262169, 1, 0, 262168, 1, 0, 262167, 1, 0, 262166, 1, 0, 262165, 1, 0, 196615, 1, 0, 196614, 1, 0, 196613, 1, 0, 196612, 1, 0, 196611, 1, 0, 196610, 1, 0)
 
 [node name="CurrentMenuSubviewportContainer" type="SubViewportContainer" parent="Layers"]
-visible = false
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 1
 anchors_preset = 15
@@ -52,7 +49,7 @@ metadata/_edit_lock_ = true
 disable_3d = true
 handle_input_locally = false
 size = Vector2i(1920, 1080)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="LevelTilemap" parent="Layers/CurrentMenuSubviewportContainer/SubViewport" instance=ExtResource("1_poxqg")]
 layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608, 1, 0, 262144, 1, 0, 327680, 1, 0, 393216, 1, 0, 458752, 1, 0, 524288, 1, 0, 589824, 1, 0, 655360, 1, 0, 720896, 1, 0, 786432, 1, 0, 851968, 1, 0, 917504, 1, 0, 983040, 1, 0, 1048576, 1, 0, 1048577, 1, 0, 1048578, 1, 0, 1048579, 1, 0, 1048580, 1, 0, 1048581, 1, 0, 1048582, 1, 0, 1048583, 1, 0, 1048584, 1, 0, 1048585, 1, 0, 1048586, 1, 0, 1048587, 1, 0, 1048588, 1, 0, 1048589, 1, 0, 1048590, 1, 0, 1048591, 1, 0, 1048592, 1, 0, 1048593, 1, 0, 1048594, 1, 0, 1048595, 1, 0, 1048596, 1, 0, 1048597, 1, 0, 1048598, 1, 0, 1048599, 1, 0, 1048600, 1, 0, 1048601, 1, 0, 1048602, 1, 0, 1048603, 1, 0, 1048604, 1, 0, 1048605, 1, 0, 983069, 1, 0, 917533, 1, 0, 851997, 1, 0, 786461, 1, 0, 720925, 1, 0, 655389, 1, 0, 589853, 1, 0, 524317, 1, 0, 458781, 1, 0, 393245, 1, 0, 327709, 1, 0, 262173, 1, 0, 196637, 1, 0, 131101, 1, 0, 65565, 1, 0, 29, 1, 0, 851996, 1, 0, 851995, 1, 0, 851994, 1, 0, 851993, 1, 0, 851992, 1, 0, 851991, 1, 0, 851990, 1, 0, 786454, 1, 0, 720918, 1, 0, 720917, 1, 0, 720916, 1, 0, 655380, 1, 0, 655379, 1, 0, 393232, 1, 0, 393231, 1, 0, 393230, 1, 0, 393229, 1, 0, 393228, 1, 0, 393227, 1, 0, 393226, 1, 0, 393225, 1, 0, 655370, 1, 0, 655369, 1, 0, 655368, 1, 0, 589831, 1, 0, 655367, 1, 0, 655366, 1, 0, 720902, 1, 0, 786438, 1, 0, 851974, 1, 0, 917510, 1, 0, 917509, 1, 0, 917508, 1, 0, 720897, 1, 0, 720898, 1, 0, 327681, 1, 0, 327682, 1, 0, 327683, 1, 0, 327684, 1, 0, 327703, 1, 0, 327704, 1, 0, 327705, 1, 0, 393242, 1, 0, 393243, 1, 0, 393244, 1, 0)
@@ -60,12 +57,13 @@ layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608,
 [node name="LevelTilemap" parent="." instance=ExtResource("1_poxqg")]
 
 [node name="Spectacle" parent="." instance=ExtResource("2_lwxn8")]
-position = Vector2(448, 512)
-texture = SubResource("ViewportTexture_h21m1")
-texture_offset = Vector2(448, 512)
+position = Vector2(896, 448)
+texture = SubResource("ViewportTexture_nbtcd")
+texture_offset = Vector2(896, 448)
 polygon = PackedVector2Array(305, 0, 291.673, 89.1734, 252.856, 170.554, 191.943, 237.03, 114.255, 282.791, 26.5825, 303.839, -63.4131, 298.335, -147.867, 266.759, -219.399, 211.871, -271.757, 138.467, -300.366, 52.9627, -302.727, -37.1702, -278.631, -124.055, -230.186, -200.098, -161.625, -258.655, -78.9398, -294.607, 10.6443, -304.814, 99.2983, -288.383, 179.274, -246.75, 243.584, -183.554, 286.606, -104.316)
 node_count = 21
 shape_radius = 305
 rim_thickness = 37
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" parent="." instance=ExtResource("3_vi25t")]
+position = Vector2(640, 256)

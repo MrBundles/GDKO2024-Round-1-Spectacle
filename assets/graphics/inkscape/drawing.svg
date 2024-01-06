@@ -24,7 +24,7 @@
      inkscape:deskcolor="#484848"
      inkscape:document-units="px"
      inkscape:zoom="1.0897757"
-     inkscape:cx="259.22764"
+     inkscape:cx="259.68647"
      inkscape:cy="156.45421"
      inkscape:window-width="1920"
      inkscape:window-height="1121"
@@ -79,6 +79,13 @@
        x="16.933331"
        y="33.866665" />
     <rect
+       style="fill:#ffffff;fill-opacity:1;stroke-width:0.757502;stroke-linecap:round;stroke-opacity:0.345098"
+       id="rect1-5-3"
+       width="16.933332"
+       height="16.933332"
+       x="33.866665"
+       y="84.666656" />
+    <rect
        style="fill:#ffd166;fill-opacity:1;stroke-width:0.757502;stroke-linecap:round;stroke-opacity:0.345098"
        id="rect1-6"
        width="16.933332"
@@ -117,5 +124,16 @@
          style="fill:#ffffff;fill-opacity:1;stroke-width:0.757502"
          x="33.232769"
          y="29.743584">Color Palette</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11.2889px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';fill:#ffffff;fill-opacity:1;stroke-width:0.757502;stroke-linecap:round;stroke-opacity:0.345098"
+       x="33.866665"
+       y="76.199997"
+       id="text1-5"><tspan
+         sodipodi:role="line"
+         id="tspan1-8"
+         style="fill:#ffffff;fill-opacity:1;stroke-width:0.757502"
+         x="33.866665"
+         y="76.199997">Player</tspan></text>
   </g>
 </svg>
