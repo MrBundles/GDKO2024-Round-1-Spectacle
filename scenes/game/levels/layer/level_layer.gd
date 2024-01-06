@@ -20,6 +20,8 @@ extends CanvasLayer
 # main functions ---------------------------------------------------------------------------------------------------------
 func _ready():
 	# connect signals
+	gSignals.start_layer_transition.connect(on_start_layer_transition)
+	gSignals.finish_layer_transition.connect(on_finish_layer_transition)
 	
 	# initialize variables
 	
@@ -39,9 +41,18 @@ func _process(delta):
 func set_layer_id(new_val):
 	layer_id = new_val
 	
-	if layer_id < layer_colors.size():
+	if not layer_id: return
+	
+	if layer_id > -1 and layer_id < layer_colors.size():
 		$ModulateTarget.modulate = layer_colors[layer_id]
 
 # signal functions --------------------------------------------------------------------------------------------------------
+func on_start_layer_transition(new_layer_id):
+	if new_layer_id == layer_id:
+		show()
 
+
+func on_finish_layer_transition(new_layer_id):
+	if new_layer_id != layer_id:
+		hide()
 

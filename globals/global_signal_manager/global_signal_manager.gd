@@ -6,6 +6,8 @@ extends Node
 
 # signals ----------------------------------------------------------------------------------------------------------------
 signal refresh_viewport_textures
+signal start_layer_transition										# new_layer_id
+signal finish_layer_transition										# new_layer_id
 
 # enums ------------------------------------------------------------------------------------------------------------------
 

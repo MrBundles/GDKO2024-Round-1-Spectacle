@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bbq5duc4x5e7i"]
+[gd_scene load_steps=10 format=3 uid="uid://bbq5duc4x5e7i"]
 
 [ext_resource type="Script" path="res://scenes/game/levels/level.gd" id="1_e46el"]
 [ext_resource type="PackedScene" uid="uid://cnmeffobujp1t" path="res://scenes/game/levels/layer/layer.tscn" id="1_pyusk"]
@@ -6,15 +6,21 @@
 [ext_resource type="PackedScene" uid="uid://g8gp7ghxbk06" path="res://scenes/game/objects/spectacle/spectacle.tscn" id="2_lwxn8"]
 [ext_resource type="PackedScene" uid="uid://b4y7cipya3vxn" path="res://scenes/game/characters/player/player.tscn" id="3_vi25t"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_4yp74"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_tw5dv"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_bl48o"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_1skn4"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_dypav"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_yx2w5"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_e46el")
-active_layer_id = 4
+active_layer_id = 1
 
 [node name="Layers" type="Control" parent="."]
 custom_minimum_size = Vector2(1920, 1080)
@@ -25,25 +31,44 @@ offset_bottom = 1080.0
 metadata/_edit_lock_ = true
 
 [node name="TextureRectLayer1" parent="Layers" instance=ExtResource("2_cjah4")]
-visible = false
 layout_mode = 1
-texture = SubResource("ViewportTexture_4yp74")
+texture = SubResource("ViewportTexture_tw5dv")
 viewport_path = NodePath("../../Layer1/SubViewport")
+layer_id = 1
 
 [node name="TextureRectLayer2" parent="Layers" instance=ExtResource("2_cjah4")]
+visible = false
 layout_mode = 1
-texture = SubResource("ViewportTexture_bl48o")
+texture = SubResource("ViewportTexture_1skn4")
 viewport_path = NodePath("../../Layer2/SubViewport")
+layer_id = 2
 
-[node name="Player" parent="." instance=ExtResource("3_vi25t")]
-position = Vector2(640, 256)
+[node name="TextureRectLayer3" parent="Layers" instance=ExtResource("2_cjah4")]
+visible = false
+layout_mode = 1
+texture = SubResource("ViewportTexture_dypav")
+viewport_path = NodePath("../../Layer3/SubViewport")
+layer_id = 3
+
+[node name="TextureRectLayer4" parent="Layers" instance=ExtResource("2_cjah4")]
+visible = false
+layout_mode = 1
+texture = SubResource("ViewportTexture_yx2w5")
+viewport_path = NodePath("../../Layer4/SubViewport")
+layer_id = 4
+
+[node name="Player" parent="." groups=["player"] instance=ExtResource("3_vi25t")]
+position = Vector2(128, 768)
+h_accel = 6000.0
+h_decel = 5000.0
+gravity = 3000.0
+jump = 75000.0
+up_vel_max = 100000.0
+down_vel_max = 100000.0
 
 [node name="Layer1" parent="." instance=ExtResource("1_pyusk")]
 layer = 3
 layer_id = 1
-
-[node name="SubViewport" parent="Layer1" index="0"]
-transparent_bg = false
 
 [node name="ModulateTarget" parent="Layer1" index="1"]
 modulate = Color(0.0666667, 0.541176, 0.698039, 1)
@@ -51,26 +76,57 @@ modulate = Color(0.0666667, 0.541176, 0.698039, 1)
 [node name="LevelTilemap" parent="Layer1/ModulateTarget" index="0"]
 layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608, 1, 0, 262144, 1, 0, 327680, 1, 0, 393216, 1, 0, 458752, 1, 0, 524288, 1, 0, 589824, 1, 0, 655360, 1, 0, 720896, 1, 0, 786432, 1, 0, 851968, 1, 0, 917504, 1, 0, 983040, 1, 0, 1048576, 1, 0, 1048577, 1, 0, 1048578, 1, 0, 1048579, 1, 0, 1048580, 1, 0, 1048581, 1, 0, 1048582, 1, 0, 1048583, 1, 0, 1048584, 1, 0, 1048585, 1, 0, 1048586, 1, 0, 1048587, 1, 0, 1048588, 1, 0, 1048589, 1, 0, 1048590, 1, 0, 1048591, 1, 0, 1048592, 1, 0, 1048593, 1, 0, 1048594, 1, 0, 1048595, 1, 0, 1048596, 1, 0, 1048597, 1, 0, 1048598, 1, 0, 1048599, 1, 0, 1048600, 1, 0, 1048601, 1, 0, 1048602, 1, 0, 1048603, 1, 0, 1048604, 1, 0, 1048605, 1, 0, 983069, 1, 0, 917533, 1, 0, 851997, 1, 0, 786461, 1, 0, 720925, 1, 0, 655389, 1, 0, 589853, 1, 0, 524317, 1, 0, 458781, 1, 0, 393245, 1, 0, 327709, 1, 0, 262173, 1, 0, 196637, 1, 0, 131101, 1, 0, 65565, 1, 0, 29, 1, 0, 851969, 1, 0, 851970, 1, 0, 851971, 1, 0, 851972, 1, 0, 851973, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 1, 0, 458768, 1, 0, 458769, 1, 0, 458770, 1, 0, 458771, 1, 0, 655376, 1, 0, 655377, 1, 0, 720913, 1, 0, 720914, 1, 0, 720915, 1, 0, 720916, 1, 0, 917520, 1, 0, 917521, 1, 0, 917522, 1, 0, 917523, 1, 0, 917524, 1, 0, 262170, 1, 0, 262169, 1, 0, 262168, 1, 0, 262167, 1, 0, 262166, 1, 0, 262165, 1, 0, 196615, 1, 0, 196614, 1, 0, 196613, 1, 0, 196612, 1, 0, 196611, 1, 0, 196610, 1, 0, 262159, 1, 0)
 
+[node name="Spectacle" parent="Layer1" instance=ExtResource("2_lwxn8")]
+position = Vector2(640, 384)
+texture = SubResource("ViewportTexture_yx2w5")
+texture_offset = Vector2(640, 384)
+polygon = PackedVector2Array(32, 0, 30.4502, 9.83803, 25.9508, 18.7231, 18.9378, 25.7946, 10.0903, 30.3675, 0.265479, 31.9989, -9.58507, 30.5307, -18.5072, 26.1053, -25.6366, 19.1511, -30.2828, 10.3419, -31.9956, 0.530941, -30.6092, -9.33145, -26.2579, -18.29, -19.3631, -25.4768, -10.5928, -30.1959, -0.796365, -31.9901, 9.07719, -30.6856, 18.0715, -26.4087, 25.3153, -19.5738, 30.107, -10.8429, 31.9824, -1.06173)
+viewport_path = NodePath("../../Layer4/SubViewport")
+new_layer_id = 4
+initial_shape_radius = 32
+shape_radius = 32
+
 [node name="Layer2" parent="." instance=ExtResource("1_pyusk")]
 layer = 2
+visible = false
 layer_id = 2
-
-[node name="SubViewport" parent="Layer2" index="0"]
-transparent_bg = false
 
 [node name="ModulateTarget" parent="Layer2" index="1"]
 modulate = Color(1, 0.819608, 0.4, 1)
 
-[node name="Spectacle" parent="Layer2" instance=ExtResource("2_lwxn8")]
-position = Vector2(1024, 448)
-texture = SubResource("ViewportTexture_4yp74")
-texture_offset = Vector2(1024, 448)
-polygon = PackedVector2Array(467, 0, 464.442, 48.8148, 456.795, 97.0948, 444.143, 144.311, 426.626, 189.946, 404.434, 233.5, 377.811, 274.496, 347.049, 312.484, 312.484, 347.049, 274.496, 377.811, 233.5, 404.434, 189.946, 426.626, 144.311, 444.143, 97.0947, 456.795, 48.8148, 464.442, -2.04132e-05, 467, -48.8148, 464.442, -97.0948, 456.795, -144.311, 444.143, -189.946, 426.626, -233.5, 404.434, -274.496, 377.811, -312.484, 347.049, -347.049, 312.484, -377.811, 274.496, -404.434, 233.5, -426.626, 189.946, -444.143, 144.311, -456.795, 97.0947, -464.442, 48.8148, -467, -4.08264e-05, -464.442, -48.8148, -456.795, -97.0948, -444.143, -144.311, -426.626, -189.946, -404.434, -233.5, -377.811, -274.496, -347.049, -312.484, -312.484, -347.049, -274.496, -377.811, -233.5, -404.434, -189.946, -426.626, -144.311, -444.143, -97.0949, -456.795, -48.8147, -464.442, 5.56892e-06, -467, 48.8147, -464.442, 97.0947, -456.795, 144.311, -444.143, 189.946, -426.626, 233.5, -404.434, 274.496, -377.811, 312.484, -347.049, 347.049, -312.484, 377.811, -274.496, 404.434, -233.5, 426.626, -189.946, 444.143, -144.311, 456.795, -97.0948, 464.442, -48.8149)
+[node name="Layer3" parent="." instance=ExtResource("1_pyusk")]
+layer = 3
+visible = false
+layer_id = 3
+
+[node name="ModulateTarget" parent="Layer3" index="1"]
+modulate = Color(0.0235294, 0.839216, 0.627451, 1)
+
+[node name="LevelTilemap" parent="Layer3/ModulateTarget" index="0"]
+layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608, 1, 0, 262144, 1, 0, 327680, 1, 0, 393216, 1, 0, 458752, 1, 0, 524288, 1, 0, 589824, 1, 0, 655360, 1, 0, 720896, 1, 0, 786432, 1, 0, 851968, 1, 0, 917504, 1, 0, 983040, 1, 0, 1048576, 1, 0, 1048577, 1, 0, 1048578, 1, 0, 1048579, 1, 0, 1048580, 1, 0, 1048581, 1, 0, 1048582, 1, 0, 1048583, 1, 0, 1048584, 1, 0, 1048585, 1, 0, 1048586, 1, 0, 1048587, 1, 0, 1048588, 1, 0, 1048589, 1, 0, 1048590, 1, 0, 1048591, 1, 0, 1048592, 1, 0, 1048593, 1, 0, 1048594, 1, 0, 1048595, 1, 0, 1048596, 1, 0, 1048597, 1, 0, 1048598, 1, 0, 1048599, 1, 0, 1048600, 1, 0, 1048601, 1, 0, 1048602, 1, 0, 1048603, 1, 0, 1048604, 1, 0, 1048605, 1, 0, 983069, 1, 0, 917533, 1, 0, 851997, 1, 0, 786461, 1, 0, 720925, 1, 0, 655389, 1, 0, 589853, 1, 0, 524317, 1, 0, 458781, 1, 0, 393245, 1, 0, 327709, 1, 0, 262173, 1, 0, 196637, 1, 0, 131101, 1, 0, 65565, 1, 0, 29, 1, 0, 851969, 1, 0, 851970, 1, 0, 851971, 1, 0, 851972, 1, 0, 851973, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 1, 0, 458768, 1, 0, 458769, 1, 0, 458770, 1, 0, 458771, 1, 0, 655376, 1, 0, 655377, 1, 0, 720913, 1, 0, 720914, 1, 0, 720915, 1, 0, 720916, 1, 0, 917520, 1, 0, 917521, 1, 0, 917522, 1, 0, 917523, 1, 0, 917524, 1, 0, 262170, 1, 0, 262169, 1, 0, 262168, 1, 0, 262167, 1, 0, 262166, 1, 0, 262165, 1, 0, 196615, 1, 0, 196614, 1, 0, 196613, 1, 0, 196612, 1, 0, 196611, 1, 0, 196610, 1, 0, 262159, 1, 0)
+
+[node name="Layer4" parent="." instance=ExtResource("1_pyusk")]
+layer = 3
+visible = false
+layer_id = 4
+
+[node name="ModulateTarget" parent="Layer4" index="1"]
+modulate = Color(0.937255, 0.278431, 0.435294, 1)
+
+[node name="LevelTilemap" parent="Layer4/ModulateTarget" index="0"]
+layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608, 1, 0, 262144, 1, 0, 327680, 1, 0, 393216, 1, 0, 458752, 1, 0, 524288, 1, 0, 589824, 1, 0, 655360, 1, 0, 720896, 1, 0, 786432, 1, 0, 851968, 1, 0, 917504, 1, 0, 983040, 1, 0, 1048576, 1, 0, 1048577, 1, 0, 1048578, 1, 0, 1048579, 1, 0, 1048580, 1, 0, 1048581, 1, 0, 1048582, 1, 0, 1048583, 1, 0, 1048584, 1, 0, 1048585, 1, 0, 1048586, 1, 0, 1048587, 1, 0, 1048588, 1, 0, 1048589, 1, 0, 1048590, 1, 0, 1048591, 1, 0, 1048592, 1, 0, 1048593, 1, 0, 1048594, 1, 0, 1048595, 1, 0, 1048596, 1, 0, 1048597, 1, 0, 1048598, 1, 0, 1048599, 1, 0, 1048600, 1, 0, 1048601, 1, 0, 1048602, 1, 0, 1048603, 1, 0, 1048604, 1, 0, 1048605, 1, 0, 983069, 1, 0, 917533, 1, 0, 851997, 1, 0, 786461, 1, 0, 720925, 1, 0, 655389, 1, 0, 589853, 1, 0, 524317, 1, 0, 458781, 1, 0, 393245, 1, 0, 327709, 1, 0, 262173, 1, 0, 196637, 1, 0, 131101, 1, 0, 65565, 1, 0, 29, 1, 0, 851969, 1, 0, 851970, 1, 0, 851971, 1, 0, 851972, 1, 0, 851973, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 1, 0, 458768, 1, 0, 458769, 1, 0, 458770, 1, 0, 458771, 1, 0, 655376, 1, 0, 655377, 1, 0, 720913, 1, 0, 720914, 1, 0, 720915, 1, 0, 720916, 1, 0, 917520, 1, 0, 917521, 1, 0, 917522, 1, 0, 917523, 1, 0, 917524, 1, 0, 262170, 1, 0, 262169, 1, 0, 262168, 1, 0, 262167, 1, 0, 262166, 1, 0, 262165, 1, 0, 196615, 1, 0, 196614, 1, 0, 196613, 1, 0, 196612, 1, 0, 196611, 1, 0, 196610, 1, 0, 262159, 1, 0)
+
+[node name="Spectacle2" parent="Layer4" instance=ExtResource("2_lwxn8")]
+position = Vector2(576, 576)
+texture = SubResource("ViewportTexture_tw5dv")
+texture_offset = Vector2(576, 576)
+polygon = PackedVector2Array(32, 0, 30.4502, 9.83803, 25.9508, 18.7231, 18.9378, 25.7946, 10.0903, 30.3675, 0.265479, 31.9989, -9.58507, 30.5307, -18.5072, 26.1053, -25.6366, 19.1511, -30.2828, 10.3419, -31.9956, 0.530941, -30.6092, -9.33145, -26.2579, -18.29, -19.3631, -25.4768, -10.5928, -30.1959, -0.796365, -31.9901, 9.07719, -30.6856, 18.0715, -26.4087, 25.3153, -19.5738, 30.107, -10.8429, 31.9824, -1.06173)
 viewport_path = NodePath("../../Layer1/SubViewport")
-node_count = 60
-shape_radius = 467
-rim_thickness = 37
-active = null
+new_layer_id = 1
+initial_shape_radius = 32
+shape_radius = 32
 
 [editable path="Layer1"]
 [editable path="Layer2"]
+[editable path="Layer3"]
+[editable path="Layer4"]
