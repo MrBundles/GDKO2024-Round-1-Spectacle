@@ -23,9 +23,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#484848"
      inkscape:document-units="px"
-     inkscape:zoom="0.77058782"
-     inkscape:cx="226.4505"
-     inkscape:cy="351.03072"
+     inkscape:zoom="1.0897757"
+     inkscape:cx="259.22764"
+     inkscape:cy="156.45421"
      inkscape:window-width="1920"
      inkscape:window-height="1121"
      inkscape:window-x="-9"
@@ -62,11 +62,50 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       style="fill:#ff0000;stroke-width:0.757502;stroke-linecap:round;stroke-opacity:0.345098"
+       style="fill:#ef476f;stroke-width:0.757502;stroke-linecap:round;stroke-opacity:0.345098;fill-opacity:1"
        id="rect1"
        width="16.933332"
        height="16.933332"
        x="33.866665"
        y="33.866665" />
+    <rect
+       style="fill:#ffd166;fill-opacity:1;stroke-width:0.757502;stroke-linecap:round;stroke-opacity:0.345098"
+       id="rect1-6"
+       width="16.933332"
+       height="16.933332"
+       x="50.799999"
+       y="33.866665" />
+    <rect
+       style="fill:#06d6a0;fill-opacity:1;stroke-width:0.757502;stroke-linecap:round;stroke-opacity:0.345098"
+       id="rect1-6-3"
+       width="16.933332"
+       height="16.933332"
+       x="67.73333"
+       y="33.866665" />
+    <rect
+       style="fill:#118ab2;fill-opacity:1;stroke-width:0.757502;stroke-linecap:round;stroke-opacity:0.345098"
+       id="rect1-6-3-7"
+       width="16.933332"
+       height="16.933332"
+       x="84.666664"
+       y="33.866665" />
+    <rect
+       style="fill:#073b4c;fill-opacity:1;stroke-width:0.757502;stroke-linecap:round;stroke-opacity:0.345098"
+       id="rect1-6-3-7-4"
+       width="16.933332"
+       height="16.933332"
+       x="101.6"
+       y="33.866665" />
+    <text
+       xml:space="preserve"
+       style="font-size:11.2889px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';fill:#ffffff;fill-opacity:1;stroke-width:0.757502;stroke-linecap:round;stroke-opacity:0.345098"
+       x="33.232769"
+       y="29.743584"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         style="fill:#ffffff;fill-opacity:1;stroke-width:0.757502"
+         x="33.232769"
+         y="29.743584">Color Palette</tspan></text>
   </g>
 </svg>
