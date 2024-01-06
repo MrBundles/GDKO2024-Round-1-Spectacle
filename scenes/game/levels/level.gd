@@ -1,6 +1,6 @@
 @tool
 #class_name name_of_class
-extends CanvasLayer
+extends Node
 
 # purpose: 
 
@@ -20,8 +20,11 @@ func _ready():
 	# initialize variables
 	
 	# call functions
-	custom_viewport = $SubViewport
-
+	pass
+	#$TextureRect1.texture = $Layers/Layer1/SubViewport.get_texture()
+	#$TextureRect2.texture = $Layers/Layer2/SubViewport.get_texture()
+	#$Spectacle.texture = $Layers/Layer1/SubViewport.get_texture()
+	
 
 func _process(delta):
 	pass

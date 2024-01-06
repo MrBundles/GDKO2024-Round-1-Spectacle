@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnmeffobujp1t"]
+
+[ext_resource type="Script" path="res://scenes/game/levels/layer/level_layer.gd" id="1_g48wu"]
+
+[node name="Layer" type="CanvasLayer"]
+layer = 4
+script = ExtResource("1_g48wu")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 4

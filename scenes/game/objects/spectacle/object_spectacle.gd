@@ -30,7 +30,7 @@ func _ready():
 	
 	# call functions
 	generate_polygon()
-	#update_texture()
+	update_texture()
 
 
 func _process(delta):
@@ -59,9 +59,8 @@ func generate_polygon():
 func update_texture():
 	if not viewport_path:
 		return
-	var viewport_texture : ViewportTexture = ViewportTexture.new()
-	viewport_texture.viewport_path = viewport_path
-	texture = viewport_texture
+	await RenderingServer.frame_post_draw
+	texture = get_node(viewport_path).get_texture()
 
 
 # set/get functions -------------------------------------------------------------------------------------------------------
