@@ -11,13 +11,16 @@ extends Polygon2D
 # constants --------------------------------------------------------------------------------------------------------------
 
 # variables --------------------------------------------------------------------------------------------------------------
-@export_group("polygon variables")
+@export_group("polygon values")
 @export var node_count = 16 : set = set_node_count
 @export var shape_radius = 32 : set = set_shape_radius
 var polygon_points = []
 
-@export_group("spectacle variables")
+@export_group("spectacle values")
 @export var rim_thickness = 8
+
+@export_group("viewport values")
+@export_node_path("SubViewport") var viewport_path
 
 # main functions ---------------------------------------------------------------------------------------------------------
 func _ready():
@@ -27,6 +30,7 @@ func _ready():
 	
 	# call functions
 	generate_polygon()
+	#update_texture()
 
 
 func _process(delta):
@@ -50,6 +54,14 @@ func generate_polygon():
 		polygon_points.append(Vector2(shape_radius, 0).rotated(node_angle))
 	
 	set_polygon(PackedVector2Array(polygon_points))
+
+
+func update_texture():
+	if not viewport_path:
+		return
+	var viewport_texture : ViewportTexture = ViewportTexture.new()
+	viewport_texture.viewport_path = viewport_path
+	texture = viewport_texture
 
 
 # set/get functions -------------------------------------------------------------------------------------------------------

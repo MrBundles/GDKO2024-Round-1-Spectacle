@@ -1,6 +1,6 @@
-#@tool
+@tool
 #class_name name_of_class
-extends SubViewport
+extends CanvasLayer
 
 # purpose: 
 
@@ -20,8 +20,7 @@ func _ready():
 	# initialize variables
 	
 	# call functions
-	pass
-	#world_2d = get_tree().root.world_2d
+	custom_viewport = $SubViewport
 
 
 func _process(delta):
