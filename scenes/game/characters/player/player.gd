@@ -20,6 +20,7 @@ extends CharacterBody2D
 @export var up_vel_max = 100.0
 @export var down_vel_max = 100.0
 var jump_cancel_flag = true
+var transition_flag = false
 
 @export_group("color values")
 @export var layer_colors : Array[Color] = []
@@ -29,6 +30,7 @@ var jump_cancel_flag = true
 func _ready():
 	# connect signals
 	gSignals.start_layer_transition.connect(on_start_layer_transition)
+	gSignals.finish_layer_transition.connect(on_finish_layer_transition)
 	
 	# initialize variables
 	
@@ -37,8 +39,9 @@ func _ready():
 
 
 func _process(delta):
-	get_input(delta)
-	move_and_slide()
+	if not transition_flag:
+		get_input(delta)
+		move_and_slide()
 
 
 # helper functions --------------------------------------------------------------------------------------------------------
@@ -89,5 +92,18 @@ func get_input(delta):
 
 # signal functions --------------------------------------------------------------------------------------------------------
 func on_start_layer_transition(new_layer_id):
-	var tween = get_tree().create_tween()
+	#transition_flag = true
+	pass
+	
+	#for i in range(1,5):
+		#set_collision_layer_value(i, i==0)
+		#set_collision_mask_value(i, i==0)
 
+
+func on_finish_layer_transition(new_layer_id):
+	#transition_flag = false
+	
+	for i in range(1,5):
+		set_collision_layer_value(i, i==new_layer_id)
+		set_collision_mask_value(i, i==new_layer_id)
+		print(get_collision_layer_value(i))

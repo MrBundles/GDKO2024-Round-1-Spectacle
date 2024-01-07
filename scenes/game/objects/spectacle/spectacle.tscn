@@ -2,22 +2,33 @@
 
 [ext_resource type="Script" path="res://scenes/game/objects/spectacle/object_spectacle.gd" id="1_3b4u6"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_g5pc5"]
-radius = 64.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_q75tq"]
+radius = 17.0
 
 [node name="Spectacle" type="Polygon2D"]
 position = Vector2(184, 72)
 texture_offset = Vector2(184, 72)
-polygon = PackedVector2Array(64, 0, 63.2203, 9.95936, 60.9003, 19.6761, 57.0966, 28.9134, 51.9016, 37.4462, 45.4422, 45.0667, 37.8755, 51.5892, 29.3861, 56.8547, 20.1806, 60.735, 10.4835, 63.1355, 0.530959, 63.9978, -9.43453, 63.3008, -19.1701, 61.0615, -28.4387, 57.3345, -37.0143, 52.2105, -44.6882, 45.8145, -51.2732, 38.3022, -56.609, 29.8567, -60.5655, 20.6838, -63.0464, 11.0069, -63.9912, 1.06188, -63.3769, -8.90904, -61.2184, -18.6629, -57.5684, -27.9621, -52.5158, -36.5799, -46.1837, -44.3065, -38.7263, -50.9537, -30.3253, -56.3593, -21.1856, -60.3918, -11.5296, -62.9529, -1.59273, -63.9802, 8.38295, -63.4486, 18.1544, -61.3712, 27.4835, -57.7984, 36.143, -52.8175, 43.9219, -46.5496, 50.6306, -39.1477, 56.1058, -30.7919, 60.214, -21.6859, 62.8551, -12.0515, 63.9648, -2.12347)
+polygon = PackedVector2Array(17, 0, 15.9521, 5.87621, 12.9377, 11.028, 8.32827, 14.8203, 2.69216, 16.7855, -3.27584, 16.6814, -8.84, 14.5208, -13.3144, 10.5701, -16.1473, 5.31637, -16.9897, -0.592803, -15.7375, -6.4289, -12.5452, -11.4724, -7.8064, -15.1017, -2.10519, -16.8691, 3.85554, -16.557, 9.34097, -14.2037, 13.6749, -10.0994, 16.3229, -4.75006)
 script = ExtResource("1_3b4u6")
-layer_id = null
+layer_id = 1
+target_layer_id = 1
 layer_colors = Array[Color]([Color(1, 1, 1, 1), Color(0.0666667, 0.541176, 0.698039, 1), Color(1, 0.819608, 0.4, 1), Color(0.0235294, 0.839216, 0.627451, 1), Color(0.937255, 0.278431, 0.435294, 1)])
-shape_radius = 64
-rim_thickness = 12
+initial_shape_radius = 17
+shape_radius = 17
+rim_thickness = 4
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_g5pc5")
+shape = SubResource("CircleShape2D_q75tq")
+
+[node name="Particles" type="CPUParticles2D" parent="."]
+emission_shape = 4
+emission_points = PackedVector2Array(17, 0, 15.9521, 5.87621, 12.9377, 11.028, 8.32827, 14.8203, 2.69216, 16.7855, -3.27584, 16.6814, -8.84, 14.5208, -13.3144, 10.5701, -16.1473, 5.31637, -16.9897, -0.592803, -15.7375, -6.4289, -12.5452, -11.4724, -7.8064, -15.1017, -2.10519, -16.8691, 3.85554, -16.557, 9.34097, -14.2037, 13.6749, -10.0994, 16.3229, -4.75006)
+emission_colors = PackedColorArray()
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 16.22
+initial_velocity_max = 16.22
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

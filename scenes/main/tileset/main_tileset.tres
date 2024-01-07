@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://btdt7y7kifa2k" path="res://scenes/main/tileset/main_tileset.png" id="1_g45sv"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bpbqe"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_087cq"]
 texture = ExtResource("1_g45sv")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
@@ -28,8 +28,10 @@ texture_region_size = Vector2i(64, 64)
 5:0/0 = 0
 5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:0/0/physics_layer_0/angular_velocity = 0.0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
 
 [resource]
+resource_local_to_scene = true
 tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
-sources/1 = SubResource("TileSetAtlasSource_bpbqe")
+sources/1 = SubResource("TileSetAtlasSource_087cq")

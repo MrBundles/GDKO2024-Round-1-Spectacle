@@ -12,7 +12,8 @@ extends Polygon2D
 
 # variables --------------------------------------------------------------------------------------------------------------
 @export_node_path("SubViewport") var viewport_path
-@export var layer_id = 0
+@export var layer_id = 0 : set = set_layer_id
+@export var target_layer_id = 0
 
 @export_group("color values")
 @export var layer_colors : Array[Color] = []
@@ -35,6 +36,7 @@ var transition_tween : Tween
 func _ready():
 	# connect signals
 	gSignals.refresh_viewport_textures.connect(refresh_viewport_textures)
+	gSignals.start_layer_transition.connect(on_start_layer_transition)
 	
 	# initialize variables
 	
@@ -45,14 +47,16 @@ func _ready():
 func _process(delta):
 	texture_offset = position
 	queue_redraw()
+	$Area2D.monitoring = !active
 
 
 func _draw():
-	if not polygon_points:
-		return
+	if not polygon_points or polygon_points.size() < 1: return
+	if not target_layer_id: return
+	
 	var outline_points = polygon_points.duplicate()
 	outline_points.append(polygon_points[0])
-	draw_polyline(PackedVector2Array(outline_points), layer_colors[layer_id].darkened(.25), rim_thickness, true)
+	draw_polyline(PackedVector2Array(outline_points), layer_colors[target_layer_id].lightened(.25), rim_thickness, true)
 
 
 # helper functions --------------------------------------------------------------------------------------------------------
@@ -63,16 +67,29 @@ func generate_polygon():
 		polygon_points.append(Vector2(shape_radius, 0).rotated(node_angle))
 	
 	set_polygon(PackedVector2Array(polygon_points))
+	
+	if not $Particles: return
+	$Particles.emission_points = PackedVector2Array(polygon_points)
 
 
 func finish_layer_transition():
-	gSignals.finish_layer_transition.emit(layer_id)
+	gSignals.finish_layer_transition.emit(target_layer_id)
 	shape_radius = initial_shape_radius
 	active = false
-	$Area2D.monitoring = true
 
 
 # set/get functions -------------------------------------------------------------------------------------------------------
+func set_layer_id(new_val):
+	layer_id = clamp(new_val, 0, 4)
+	
+	if not $Area2D: return
+	
+	for i in range(1,5):
+		$Area2D.set_collision_layer_value(i, i==layer_id)
+		$Area2D.set_collision_mask_value(i, i==layer_id)
+		set_visibility_layer_bit(i-1, i==layer_id)
+
+
 func set_node_count(new_val):
 	node_count = new_val
 	generate_polygon()
@@ -92,7 +109,7 @@ func set_initial_shape_radius(new_val):
 func set_shape_radius(new_val):
 	shape_radius = new_val
 	var circumference = 2 * PI * shape_radius
-	node_count = circumference / 10.0
+	node_count = circumference / 6
 
 
 func set_active(new_val):
@@ -102,12 +119,10 @@ func set_active(new_val):
 	
 	if not active: return
 	
-	gSignals.start_layer_transition.emit(layer_id)
-	print("starting layer transition: layer %s" % [layer_id])
-	$Area2D.monitoring = false
+	gSignals.start_layer_transition.emit(target_layer_id)
 	transition_tween = create_tween()
-	var tween_duration = 1.5
-	transition_tween.tween_property(self, "shape_radius", 2500, tween_duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
+	var tween_duration = 1.0
+	transition_tween.tween_property(self, "shape_radius", 2400, tween_duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 	transition_tween.tween_callback(finish_layer_transition)
 
 
@@ -121,5 +136,12 @@ func refresh_viewport_textures():
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("player") and not active:
-		print("set active to true")
 		active = true
+
+
+func on_start_layer_transition(new_layer_id):
+	var parent_layer = get_parent().layer_id
+	if new_layer_id != parent_layer:
+		$Area2D.monitoring = false
+	else:
+		$Area2D.monitoring = true

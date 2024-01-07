@@ -44,15 +44,20 @@ func set_layer_id(new_val):
 	if not layer_id: return
 	
 	if layer_id > -1 and layer_id < layer_colors.size():
-		$ModulateTarget.modulate = layer_colors[layer_id]
+		$ColorRect.modulate = layer_colors[layer_id].darkened(.5)
+		$LevelTilemap.modulate = layer_colors[layer_id]
 
 # signal functions --------------------------------------------------------------------------------------------------------
 func on_start_layer_transition(new_layer_id):
 	if new_layer_id == layer_id:
-		show()
+		$LevelTilemap.collision_visibility_mode = TileMap.VISIBILITY_MODE_FORCE_SHOW
+	else:
+		$LevelTilemap.collision_visibility_mode = TileMap.VISIBILITY_MODE_FORCE_HIDE
 
 
 func on_finish_layer_transition(new_layer_id):
-	if new_layer_id != layer_id:
-		hide()
+	if new_layer_id == layer_id:
+		layer = 1
+	else:
+		layer = 0
 

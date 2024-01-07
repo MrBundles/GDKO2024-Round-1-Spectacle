@@ -13,6 +13,7 @@ extends Node
 # variables --------------------------------------------------------------------------------------------------------------
 @export_group("layer values")
 @export var active_layer_id = 0 : set = set_active_layer_id
+@export_flags("layer 1", "layer 2", "layer 3", "layer 4") var show_layer_previews
 
 # main functions ---------------------------------------------------------------------------------------------------------
 func _ready():
