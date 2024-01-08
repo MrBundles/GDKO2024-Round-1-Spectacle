@@ -36,5 +36,5 @@ func _process(delta):
 
 # signal functions --------------------------------------------------------------------------------------------------------
 func on_start_layer_transition(new_layer_id):
-	
+	pass
 

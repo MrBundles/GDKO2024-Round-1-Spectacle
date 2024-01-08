@@ -14,6 +14,7 @@ extends Polygon2D
 @export_node_path("SubViewport") var viewport_path
 @export var layer_id = 0 : set = set_layer_id
 @export var target_layer_id = 0
+@export var enabled : bool : set = set_enabled
 
 @export_group("color values")
 @export var layer_colors : Array[Color] = []
@@ -124,6 +125,16 @@ func set_active(new_val):
 	var tween_duration = 1.0
 	transition_tween.tween_property(self, "shape_radius", 2400, tween_duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 	transition_tween.tween_callback(finish_layer_transition)
+
+
+func set_enabled(new_val):
+	enabled = new_val
+	
+	if not $Area2D: return
+	if not $Particles: return
+	
+	$Area2D.monitoring = enabled
+	$Particles.emitting = enabled
 
 
 # signal functions --------------------------------------------------------------------------------------------------------
