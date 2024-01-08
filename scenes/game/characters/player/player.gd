@@ -31,6 +31,7 @@ var height : float = 64
 var delta_height : float = 1
 var target_height : float = 64
 var width : float = 64
+var rest_undulation_mult = 1
 
 
 # main functions ---------------------------------------------------------------------------------------------------------
@@ -53,11 +54,14 @@ func _process(delta):
 	# update width and height values
 	if is_on_floor():
 		if velocity.x == 0:
-			target_height = 64 + sin(Time.get_ticks_msec() / 200.0) * 400 * delta
+			rest_undulation_mult = clamp(rest_undulation_mult + 200 * delta, 0, 400)
+			target_height = 64 + sin(Time.get_ticks_msec() / 200.0) * rest_undulation_mult * delta
 		else:
 			target_height = 64 - 12 * abs(velocity.x) / h_vel_max
+			rest_undulation_mult = 0
 	else:
 		target_height = 64 - 24 * velocity.y / v_vel_max
+		rest_undulation_mult = 0
 	
 	delta_height = lerpf(delta_height, (height - target_height) * 0.5, 8 * delta)
 	height -= delta_height
@@ -89,9 +93,9 @@ func _draw():
 	# draw glasses
 	var spectacle_size = Vector2(24, 24)
 	var spectacle_thickness = 3.0
-	draw_rect(Rect2(eye_position - spectacle_size / 2, spectacle_size), color.darkened(.5), false, spectacle_thickness)
-	draw_line(eye_position + Vector2(-spectacle_size.x / 2, 0), eye_position + Vector2(-32, -2), color.darkened(.5), spectacle_thickness)
-	draw_line(eye_position + Vector2(spectacle_size.x / 2, 0), eye_position + Vector2(32, -2), color.darkened(.5), spectacle_thickness)
+	#draw_rect(Rect2(eye_position - spectacle_size / 2, spectacle_size), color.darkened(.5), false, spectacle_thickness)
+	#draw_line(eye_position + Vector2(-spectacle_size.x / 2, 0), eye_position + Vector2(-32, -2), color.darkened(.5), spectacle_thickness)
+	#draw_line(eye_position + Vector2(spectacle_size.x / 2, 0), eye_position + Vector2(32, -2), color.darkened(.5), spectacle_thickness)
 	
 
 
@@ -146,6 +150,10 @@ func set_layer_id(new_val):
 func on_start_layer_transition(new_layer_id):
 	set_collision_layer_value(new_layer_id, true)
 	layer_id = new_layer_id
+	
+	for i in range(1,5):
+		set_collision_layer_value(i, i==new_layer_id)
+		set_collision_mask_value(i, i==new_layer_id)
 
 
 func on_finish_layer_transition(new_layer_id):
