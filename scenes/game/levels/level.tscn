@@ -7,16 +7,16 @@
 [ext_resource type="PackedScene" uid="uid://b4y7cipya3vxn" path="res://scenes/game/characters/player/player.tscn" id="3_vi25t"]
 [ext_resource type="Texture2D" uid="uid://btdt7y7kifa2k" path="res://scenes/main/tileset/main_tileset.png" id="5_42h3j"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_c5vn3"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_h0rgl"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_c603e"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_ou0d7"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ix1w3"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_n367s"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_qrxx6"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_x8724"]
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bpbqe"]
@@ -155,25 +155,25 @@ metadata/_edit_lock_ = true
 [node name="TextureRectLayer1" parent="Layers" instance=ExtResource("2_cjah4")]
 z_index = 1
 layout_mode = 1
-texture = SubResource("ViewportTexture_c5vn3")
+texture = SubResource("ViewportTexture_h0rgl")
 viewport_path = NodePath("../../Layer1/SubViewport")
 layer_id = 1
 
 [node name="TextureRectLayer2" parent="Layers" instance=ExtResource("2_cjah4")]
 layout_mode = 1
-texture = SubResource("ViewportTexture_c603e")
+texture = SubResource("ViewportTexture_ou0d7")
 viewport_path = NodePath("../../Layer2/SubViewport")
 layer_id = 2
 
 [node name="TextureRectLayer3" parent="Layers" instance=ExtResource("2_cjah4")]
 layout_mode = 1
-texture = SubResource("ViewportTexture_ix1w3")
+texture = SubResource("ViewportTexture_n367s")
 viewport_path = NodePath("../../Layer3/SubViewport")
 layer_id = 3
 
 [node name="TextureRectLayer4" parent="Layers" instance=ExtResource("2_cjah4")]
 layout_mode = 1
-texture = SubResource("ViewportTexture_qrxx6")
+texture = SubResource("ViewportTexture_x8724")
 viewport_path = NodePath("../../Layer4/SubViewport")
 layer_id = 4
 
@@ -185,6 +185,7 @@ h_decel = 3000.0
 gravity = 3000.0
 jump = 75000.0
 h_vel_max = 750.0
+v_vel_max = 1250.0
 
 [node name="Layer1" parent="." instance=ExtResource("1_pyusk")]
 layer = 1
@@ -201,24 +202,25 @@ modulate = Color(0.0333333, 0.270588, 0.349019, 1)
 modulate = Color(0.0666667, 0.541176, 0.698039, 1)
 tile_set = SubResource("TileSet_tastm")
 collision_visibility_mode = 1
+layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608, 1, 0, 262144, 1, 0, 327680, 1, 0, 393216, 1, 0, 458752, 1, 0, 524288, 1, 0, 589824, 1, 0, 655360, 1, 0, 720896, 1, 0, 786432, 1, 0, 851968, 1, 0, 917504, 1, 0, 983040, 1, 0, 1048576, 1, 0, 1048577, 1, 0, 1048578, 1, 0, 1048579, 1, 0, 1048580, 1, 0, 1048581, 1, 0, 1048582, 1, 0, 1048583, 1, 0, 1048584, 1, 0, 1048585, 1, 0, 1048586, 1, 0, 1048587, 1, 0, 1048588, 1, 0, 1048589, 1, 0, 1048590, 1, 0, 1048591, 1, 0, 1048592, 1, 0, 1048593, 1, 0, 1048594, 1, 0, 1048595, 1, 0, 1048596, 1, 0, 1048597, 1, 0, 1048598, 1, 0, 1048599, 1, 0, 1048600, 1, 0, 1048601, 1, 0, 1048602, 1, 0, 1048603, 1, 0, 1048604, 1, 0, 1048605, 1, 0, 983069, 1, 0, 917533, 1, 0, 851997, 1, 0, 786461, 1, 0, 720925, 1, 0, 655389, 1, 0, 589853, 1, 0, 524317, 1, 0, 458781, 1, 0, 393245, 1, 0, 327709, 1, 0, 262173, 1, 0, 196637, 1, 0, 131101, 1, 0, 65565, 1, 0, 29, 1, 0, 851969, 1, 0, 851970, 1, 0, 851971, 1, 0, 851972, 1, 0, 851973, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 1, 0, 458768, 1, 0, 458769, 1, 0, 458770, 1, 0, 458771, 1, 0, 655376, 1, 0, 655377, 1, 0, 720913, 1, 0, 720914, 1, 0, 720915, 1, 0, 720916, 1, 0, 917520, 1, 0, 917521, 1, 0, 917522, 1, 0, 917523, 1, 0, 917524, 1, 0, 262170, 1, 0, 262169, 1, 0, 262168, 1, 0, 262167, 1, 0, 262166, 1, 0, 262165, 1, 0, 196615, 1, 0, 196614, 1, 0, 196613, 1, 0, 196612, 1, 0, 196611, 1, 0, 196610, 1, 0, 851984, 1, 0, 786448, 1, 0, 720912, 1, 0, 655373, 1, 0, 655372, 1, 0, 655371, 1, 0, 655370, 1, 0, 917517, 1, 0, 851981, 1, 0, 786445, 1, 0, 720909, 1, 0)
 
 [node name="Spectacle" parent="Layer1" instance=ExtResource("2_lwxn8")]
 position = Vector2(128, 64)
-texture = SubResource("ViewportTexture_qrxx6")
+texture = SubResource("ViewportTexture_x8724")
 texture_offset = Vector2(128, 64)
 viewport_path = NodePath("../../Layer4/SubViewport")
 target_layer_id = 4
 
 [node name="Spectacle2" parent="Layer1" instance=ExtResource("2_lwxn8")]
 position = Vector2(896, 384)
-texture = SubResource("ViewportTexture_qrxx6")
+texture = SubResource("ViewportTexture_x8724")
 texture_offset = Vector2(896, 384)
 viewport_path = NodePath("../../Layer4/SubViewport")
 target_layer_id = 4
 
 [node name="Spectacle3" parent="Layer1" instance=ExtResource("2_lwxn8")]
 position = Vector2(1024, 384)
-texture = SubResource("ViewportTexture_qrxx6")
+texture = SubResource("ViewportTexture_x8724")
 texture_offset = Vector2(1024, 384)
 viewport_path = NodePath("../../Layer4/SubViewport")
 target_layer_id = 4
@@ -273,7 +275,7 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608,
 [node name="Spectacle2" parent="Layer4" instance=ExtResource("2_lwxn8")]
 visibility_layer = 8
 position = Vector2(704, 384)
-texture = SubResource("ViewportTexture_c5vn3")
+texture = SubResource("ViewportTexture_h0rgl")
 texture_offset = Vector2(704, 384)
 viewport_path = NodePath("../../Layer1/SubViewport")
 layer_id = 4
@@ -281,7 +283,7 @@ layer_id = 4
 [node name="Spectacle3" parent="Layer4" instance=ExtResource("2_lwxn8")]
 visibility_layer = 8
 position = Vector2(1152, 384)
-texture = SubResource("ViewportTexture_c5vn3")
+texture = SubResource("ViewportTexture_h0rgl")
 texture_offset = Vector2(1152, 384)
 viewport_path = NodePath("../../Layer1/SubViewport")
 layer_id = 4

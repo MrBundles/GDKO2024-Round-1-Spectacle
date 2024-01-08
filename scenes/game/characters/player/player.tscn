@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://scenes/game/characters/player/player.gd" id="1_i655x"]
 [ext_resource type="Texture2D" uid="uid://cc5ce1epabnu" path="res://scenes/game/characters/player/player.png" id="2_4bsbq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pj1gb"]
-size = Vector2(63, 63)
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_wj6bs"]
+points = PackedVector2Array(32, 32, -32, 32, -32, -16, -16, -31, 16, -31, 32, -16)
 
 [node name="Player" type="CharacterBody2D"]
 velocity = Vector2(0, 1000)
@@ -23,12 +23,8 @@ visible = false
 texture = ExtResource("2_4bsbq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_pj1gb")
+shape = SubResource("ConvexPolygonShape2D_wj6bs")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.1
-
-[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.15
 one_shot = true
-
-[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

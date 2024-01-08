@@ -55,8 +55,7 @@ func _process(delta):
 		if velocity.x == 0:
 			target_height = 64 + sin(Time.get_ticks_msec() / 200.0) * 400 * delta
 		else:
-			target_height = 64 - 8 * abs(velocity.x) / h_vel_max
-			$MoveTimer.start()
+			target_height = 64 - 12 * abs(velocity.x) / h_vel_max
 	else:
 		target_height = 64 - 24 * velocity.y / v_vel_max
 	
@@ -74,7 +73,7 @@ func _draw():
 	# draw head
 	#draw_rect(Rect2(-Vector2(-16, height - 32), Vector2(width, height / 2)), color.lightened(.5), true)
 	#draw_arc(Vector2(0, -height / 2 + 32), width / 4.0, deg_to_rad(5.0), deg_to_rad(-185.0), 32, color.darkened(.2), width / 2, true)
-	draw_arc(Vector2(0, -height * 1.5 + 96), width / 4.0, deg_to_rad(10), deg_to_rad(-190.0), 32, color.darkened(0), (width - 4) / 2, true)
+	draw_arc(Vector2(0, -height * 1.5 + 96), width / 4.0, deg_to_rad(5), deg_to_rad(-185.0), 32, color, (width - 4) / 2, true)
 	
 	# draw body
 	#draw_rect(Rect2(-Vector2(width, height-64) / 2, Vector2(width, height / 2)), color, true)
@@ -110,9 +109,9 @@ func get_input(delta):
 	# process bumps on walls
 	if is_on_wall():
 		if velocity.x < 0:
-			velocity.x = 10
+			velocity.x = clamp(1000 * delta, -h_vel_max, h_vel_max)
 		elif velocity.x > 0:
-			velocity.x = -10
+			velocity.x = clamp(-1000 * delta, -h_vel_max, h_vel_max)
 	
 	# process coyote timer
 	if is_on_floor():
@@ -123,6 +122,7 @@ func get_input(delta):
 	# process jump inputs
 	if Input.is_action_pressed("move_up") and not $CoyoteTimer.is_stopped():
 		velocity.y = clamp(velocity.y - jump * delta, -v_vel_max, v_vel_max)
+		$CoyoteTimer.stop()
 	elif Input.is_action_just_released("move_up") and velocity.y < 0 and jump_cancel_flag:
 		velocity.y = velocity.y / 2.0
 		jump_cancel_flag = false
@@ -145,8 +145,3 @@ func on_finish_layer_transition(new_layer_id):
 	for i in range(1,5):
 		set_collision_layer_value(i, i==new_layer_id)
 		set_collision_mask_value(i, i==new_layer_id)
-
-
-func _on_coyote_timer_timeout():
-	$CoyoteTimer.stop()
-	print("timer stopped")
