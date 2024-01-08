@@ -79,12 +79,19 @@ func _draw():
 	#draw_rect(Rect2(-Vector2(width, height-64) / 2, Vector2(width, height / 2)), color, true)
 	draw_rect(Rect2(Vector2(-width / 2, -height * 1.5 + 96), Vector2(width, height * 1.5 - 64)), color, true)
 	
-	#draw eye
+	# draw eye
 	#var eye_position = Vector2(velocity.x / h_vel_max * 16, 16 - width*.5)
 	var eye_position = Vector2(velocity.x / h_vel_max * 16, 64 - height*1.25)
 	#draw_circle(eye_position, 16, color)
 	draw_circle(eye_position, 8, color.lightened(.6))
 	draw_circle(eye_position, 4, color.darkened(.5))
+	
+	# draw glasses
+	var spectacle_size = Vector2(24, 24)
+	var spectacle_thickness = 3.0
+	draw_rect(Rect2(eye_position - spectacle_size / 2, spectacle_size), color.darkened(.5), false, spectacle_thickness)
+	draw_line(eye_position + Vector2(-spectacle_size.x / 2, 0), eye_position + Vector2(-32, -2), color.darkened(.5), spectacle_thickness)
+	draw_line(eye_position + Vector2(spectacle_size.x / 2, 0), eye_position + Vector2(32, -2), color.darkened(.5), spectacle_thickness)
 	
 
 
