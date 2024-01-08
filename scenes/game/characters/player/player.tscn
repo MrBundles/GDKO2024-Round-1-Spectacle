@@ -27,4 +27,8 @@ shape = SubResource("RectangleShape2D_pj1gb")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.1
+
+[node name="MoveTimer" type="Timer" parent="."]
 one_shot = true
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

@@ -27,12 +27,10 @@ var transition_flag = false
 @export var layer_colors : Array[Color] = []
 
 @export_group("draw values")
-var height = 64
-var delta_height = 1
-var target_height = 64
-var width = 64
-var delta_width = 1
-var target_width = 64
+var height : float = 64
+var delta_height : float = 1
+var target_height : float = 64
+var width : float = 64
 
 
 # main functions ---------------------------------------------------------------------------------------------------------
@@ -52,30 +50,43 @@ func _process(delta):
 		get_input(delta)
 		move_and_slide()
 	
+	# update width and height values
+	if is_on_floor():
+		if velocity.x == 0:
+			target_height = 64 + sin(Time.get_ticks_msec() / 200.0) * 400 * delta
+		else:
+			target_height = 64 - 8 * abs(velocity.x) / h_vel_max
+			$MoveTimer.start()
+	else:
+		target_height = 64 - 24 * velocity.y / v_vel_max
+	
+	delta_height = lerpf(delta_height, (height - target_height) * 0.5, 8 * delta)
+	height -= delta_height
+	width = 4096 / height
 	queue_redraw()
 
 
 func _draw():
 	if not v_vel_max or not h_vel_max: return
 	
-	# update width and height values
-	
-	target_height = 64 - 32 * velocity.y / v_vel_max
-	delta_height = lerpf(delta_height, (height - target_height) * 0.5, .2)
-	height -= delta_height
-	width = 4096 / height
-	print("height: %s	delta_height: %s	target_height: %s" % [height, delta_height, target_height])
-
-
 	var color = layer_colors[layer_id]
 	
 	# draw head
-	var head_pos = Vector2.ZERO + Vector2(0, sin(Time.get_ticks_msec() / 200.0) * 4)
-	draw_arc(head_pos, width / 4, 0, -PI, 32, color, 32, true)
-	#draw_circle(Vector2.ZERO, size.x / 2, Color.WHITE)
+	#draw_rect(Rect2(-Vector2(-16, height - 32), Vector2(width, height / 2)), color.lightened(.5), true)
+	#draw_arc(Vector2(0, -height / 2 + 32), width / 4.0, deg_to_rad(5.0), deg_to_rad(-185.0), 32, color.darkened(.2), width / 2, true)
+	draw_arc(Vector2(0, -height * 1.5 + 96), width / 4.0, deg_to_rad(10), deg_to_rad(-190.0), 32, color.darkened(0), (width - 4) / 2, true)
 	
 	# draw body
-	draw_rect(Rect2(-Vector2(width, height) / 2, Vector2(width, height)), color, true)
+	#draw_rect(Rect2(-Vector2(width, height-64) / 2, Vector2(width, height / 2)), color, true)
+	draw_rect(Rect2(Vector2(-width / 2, -height * 1.5 + 96), Vector2(width, height * 1.5 - 64)), color, true)
+	
+	#draw eye
+	#var eye_position = Vector2(velocity.x / h_vel_max * 16, 16 - width*.5)
+	var eye_position = Vector2(velocity.x / h_vel_max * 16, 64 - height*1.25)
+	#draw_circle(eye_position, 16, color)
+	draw_circle(eye_position, 8, color.lightened(.6))
+	draw_circle(eye_position, 4, color.darkened(.5))
+	
 
 
 # helper functions --------------------------------------------------------------------------------------------------------
@@ -99,9 +110,9 @@ func get_input(delta):
 	# process bumps on walls
 	if is_on_wall():
 		if velocity.x < 0:
-			velocity.x = 1 * delta
+			velocity.x = 10
 		elif velocity.x > 0:
-			velocity.x = -1 * delta
+			velocity.x = -10
 	
 	# process coyote timer
 	if is_on_floor():
@@ -110,13 +121,11 @@ func get_input(delta):
 		jump_cancel_flag = true
 	
 	# process jump inputs
-	if Input.is_action_just_pressed("move_up"):
-		if $CoyoteTimer.time_left > 0:
-			velocity.y = clamp(velocity.y - jump * delta, -v_vel_max, v_vel_max)
-	elif Input.is_action_just_released("move_up"):
-		if velocity.y < 0 and jump_cancel_flag:
-			velocity.y = velocity.y / 2.0
-			jump_cancel_flag = false
+	if Input.is_action_pressed("move_up") and not $CoyoteTimer.is_stopped():
+		velocity.y = clamp(velocity.y - jump * delta, -v_vel_max, v_vel_max)
+	elif Input.is_action_just_released("move_up") and velocity.y < 0 and jump_cancel_flag:
+		velocity.y = velocity.y / 2.0
+		jump_cancel_flag = false
 	else:
 		velocity.y = clamp(velocity.y + gravity * delta, -v_vel_max, v_vel_max)
 	
@@ -136,3 +145,8 @@ func on_finish_layer_transition(new_layer_id):
 	for i in range(1,5):
 		set_collision_layer_value(i, i==new_layer_id)
 		set_collision_mask_value(i, i==new_layer_id)
+
+
+func _on_coyote_timer_timeout():
+	$CoyoteTimer.stop()
+	print("timer stopped")
