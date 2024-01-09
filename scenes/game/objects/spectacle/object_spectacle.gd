@@ -1,4 +1,4 @@
-@tool
+#@tool
 #class_name name_of_class
 extends Polygon2D
 
@@ -11,7 +11,8 @@ extends Polygon2D
 # constants --------------------------------------------------------------------------------------------------------------
 
 # variables --------------------------------------------------------------------------------------------------------------
-@export var target_layer_id = 0
+@export var target_layer_id = 0 : set = set_target_layer_id
+@export var enabled = false: set = set_enabled
 
 @export_group("viewports")
 @export_node_path("SubViewport") var layer_1_viewport_path
@@ -24,13 +25,14 @@ extends Polygon2D
 
 @export_group("polygon values")
 var node_count = 16 : set = set_node_count
-@export var initial_shape_radius = 64 : set = set_initial_shape_radius
-@export var shape_radius = 32 : set = set_shape_radius
+@export var enabled_radius = 64
+var target_radius = 0
+@export var current_radius = 32 : set = set_current_radius
+var transition_radius = 2400
 var polygon_points = []
 
 @export_group("spectacle values")
 @export var rim_thickness = 8
-@export var active = false : set = set_active
 
 @export_group("tween values")
 var transition_tween : Tween
@@ -42,6 +44,7 @@ func _ready():
 	gSignals.refresh_viewport_textures.connect(refresh_viewport_textures)
 	
 	# initialize variables
+	current_radius = 0
 	
 	# call functions
 	generate_polygon()
@@ -50,7 +53,11 @@ func _ready():
 func _process(delta):
 	position = get_viewport().get_mouse_position()
 	texture_offset = position
+	
+	current_radius = lerpf(current_radius, target_radius, 10 * delta)
+	
 	queue_redraw()
+	get_input()
 
 
 func _draw():
@@ -67,7 +74,7 @@ func generate_polygon():
 	polygon_points.clear()
 	for i in node_count:
 		var node_angle = deg_to_rad(360.0 / node_count * i)
-		polygon_points.append(Vector2(shape_radius, 0).rotated(node_angle))
+		polygon_points.append(Vector2(current_radius, 0).rotated(node_angle))
 	
 	set_polygon(PackedVector2Array(polygon_points))
 	
@@ -75,11 +82,50 @@ func generate_polygon():
 	$Particles.emission_points = PackedVector2Array(polygon_points)
 
 
-func finish_layer_transition():
-	gSignals.finish_layer_transition.emit(target_layer_id)
-	shape_radius = initial_shape_radius
-	active = false
-
+func get_input():
+	if target_radius == transition_radius:
+		return
+	
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and enabled:
+		gSignals.start_layer_transition.emit(target_layer_id)
+		gVariables.current_layer_id = target_layer_id
+		target_radius = transition_radius
+	
+	if Input.is_action_just_pressed("spectacle_cancel") and enabled:
+		enabled = false
+	
+	if Input.is_action_just_pressed("spectacle_select_layer_1"):
+		if gVariables.current_layer_id == 1:
+			enabled = false
+		elif target_layer_id == 1:
+			enabled = !enabled
+		else:
+			enabled = true
+			target_layer_id = 1
+	elif Input.is_action_just_pressed("spectacle_select_layer_2"):
+		if gVariables.current_layer_id == 2:
+			enabled = false
+		elif target_layer_id == 2:
+			enabled = !enabled
+		else:
+			enabled = true
+			target_layer_id = 2
+	elif Input.is_action_just_pressed("spectacle_select_layer_3"):
+		if gVariables.current_layer_id == 3:
+			enabled = false
+		elif target_layer_id == 3:
+			enabled = !enabled
+		else:
+			enabled = true
+			target_layer_id = 3
+	elif Input.is_action_just_pressed("spectacle_select_layer_4"):
+		if gVariables.current_layer_id == 4:
+			enabled = false
+		elif target_layer_id == 4:
+			enabled = !enabled
+		else:
+			enabled = true
+			target_layer_id = 4
 
 # set/get functions -------------------------------------------------------------------------------------------------------
 func set_node_count(new_val):
@@ -87,29 +133,30 @@ func set_node_count(new_val):
 	generate_polygon()
 
 
-func set_initial_shape_radius(new_val):
-	initial_shape_radius = new_val
-	shape_radius = initial_shape_radius
-
-
-func set_shape_radius(new_val):
-	shape_radius = new_val
-	var circumference = 2 * PI * shape_radius
+func set_current_radius(new_val):
+	current_radius = new_val
+	var circumference = 2 * PI * current_radius
 	node_count = circumference / 6
+	rim_thickness = current_radius * .05
+	
+	if transition_radius - current_radius < 1:
+		gSignals.finish_layer_transition.emit(target_layer_id)
+		enabled = false
+		current_radius = 0
 
 
-func set_active(new_val):
-	if new_val == active: return
+func set_enabled(new_val):
+	enabled = new_val
 	
-	active = new_val
-	
-	if not active: return
-	
-	gSignals.start_layer_transition.emit(target_layer_id)
-	transition_tween = create_tween()
-	var tween_duration = 1.0
-	transition_tween.tween_property(self, "shape_radius", 2400, tween_duration).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
-	transition_tween.tween_callback(finish_layer_transition)
+	if enabled:
+		target_radius = enabled_radius
+	else:
+		target_radius = 0
+
+
+func set_target_layer_id(new_val):
+	target_layer_id = new_val
+	refresh_viewport_textures()
 
 
 # signal functions --------------------------------------------------------------------------------------------------------
@@ -126,5 +173,6 @@ func refresh_viewport_textures():
 	else:
 		return
 	
+	if not viewport_path: return
 	var viewport :SubViewport = get_node(viewport_path)
 	texture = viewport.get_texture()

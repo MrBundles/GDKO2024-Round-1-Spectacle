@@ -20,8 +20,8 @@ extends CanvasLayer
 # main functions ---------------------------------------------------------------------------------------------------------
 func _ready():
 	# connect signals
-	gSignals.start_layer_transition.connect(on_start_layer_transition)
-	gSignals.finish_layer_transition.connect(on_finish_layer_transition)
+	gSignals.on_set_current_layer_id.connect(on_set_current_layer_id)
+	#gSignals.finish_layer_transition.connect(on_finish_layer_transition)
 	
 	# initialize variables
 	
@@ -47,14 +47,7 @@ func set_layer_id(new_val):
 		$LevelTilemap.modulate = layer_colors[layer_id]
 
 # signal functions --------------------------------------------------------------------------------------------------------
-func on_start_layer_transition(new_layer_id):
-	if new_layer_id == layer_id:
-		$LevelTilemap.collision_visibility_mode = TileMap.VISIBILITY_MODE_FORCE_SHOW
-	else:
-		$LevelTilemap.collision_visibility_mode = TileMap.VISIBILITY_MODE_FORCE_HIDE
-
-
-func on_finish_layer_transition(new_layer_id):
+func on_set_current_layer_id(new_layer_id):
 	if new_layer_id == layer_id:
 		layer = 1
 	else:

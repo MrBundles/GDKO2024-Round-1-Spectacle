@@ -36,6 +36,7 @@ func _process(delta):
 func set_active_layer_id(new_val):
 	active_layer_id = new_val
 	
+	gVariables.current_layer_id = active_layer_id
 	gSignals.start_layer_transition.emit(active_layer_id)
 	gSignals.finish_layer_transition.emit(active_layer_id)
 

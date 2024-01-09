@@ -55,7 +55,7 @@ func _process(delta):
 	if is_on_floor():
 		if velocity.x == 0:
 			rest_undulation_mult = clamp(rest_undulation_mult + 200 * delta, 0, 400)
-			target_height = 64 + sin(Time.get_ticks_msec() / 200.0) * rest_undulation_mult * delta
+			target_height = 64 + sin(Time.get_ticks_msec() / 173.0) * rest_undulation_mult * delta
 		else:
 			target_height = 64 - 12 * abs(velocity.x) / h_vel_max
 			rest_undulation_mult = 0
@@ -96,7 +96,6 @@ func _draw():
 	#draw_rect(Rect2(eye_position - spectacle_size / 2, spectacle_size), color.darkened(.5), false, spectacle_thickness)
 	#draw_line(eye_position + Vector2(-spectacle_size.x / 2, 0), eye_position + Vector2(-32, -2), color.darkened(.5), spectacle_thickness)
 	#draw_line(eye_position + Vector2(spectacle_size.x / 2, 0), eye_position + Vector2(32, -2), color.darkened(.5), spectacle_thickness)
-	
 
 
 # helper functions --------------------------------------------------------------------------------------------------------
@@ -148,7 +147,6 @@ func set_layer_id(new_val):
 
 # signal functions --------------------------------------------------------------------------------------------------------
 func on_start_layer_transition(new_layer_id):
-	set_collision_layer_value(new_layer_id, true)
 	layer_id = new_layer_id
 	
 	for i in range(1,5):
@@ -158,3 +156,11 @@ func on_start_layer_transition(new_layer_id):
 
 func on_finish_layer_transition(new_layer_id):
 	pass
+
+
+func _on_area_2d_body_entered(body):
+	if body.is_in_group("baby"):
+		var tween = get_tree().create_tween()
+		print(body)
+		tween.tween_property(body, "position", Vector2.ZERO, 1.0)
+		tween.tween_callback(body.queue_free)
