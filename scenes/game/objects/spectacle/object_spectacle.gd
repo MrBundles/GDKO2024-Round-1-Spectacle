@@ -11,10 +11,13 @@ extends Polygon2D
 # constants --------------------------------------------------------------------------------------------------------------
 
 # variables --------------------------------------------------------------------------------------------------------------
-@export_node_path("SubViewport") var viewport_path
-@export var layer_id = 0 : set = set_layer_id
 @export var target_layer_id = 0
-@export var enabled : bool : set = set_enabled
+
+@export_group("viewports")
+@export_node_path("SubViewport") var layer_1_viewport_path
+@export_node_path("SubViewport") var layer_2_viewport_path
+@export_node_path("SubViewport") var layer_3_viewport_path
+@export_node_path("SubViewport") var layer_4_viewport_path
 
 @export_group("color values")
 @export var layer_colors : Array[Color] = []
@@ -37,7 +40,6 @@ var transition_tween : Tween
 func _ready():
 	# connect signals
 	gSignals.refresh_viewport_textures.connect(refresh_viewport_textures)
-	gSignals.start_layer_transition.connect(on_start_layer_transition)
 	
 	# initialize variables
 	
@@ -46,9 +48,9 @@ func _ready():
 
 
 func _process(delta):
+	position = get_viewport().get_mouse_position()
 	texture_offset = position
 	queue_redraw()
-	$Area2D.monitoring = !active
 
 
 func _draw():
@@ -80,17 +82,6 @@ func finish_layer_transition():
 
 
 # set/get functions -------------------------------------------------------------------------------------------------------
-func set_layer_id(new_val):
-	layer_id = clamp(new_val, 0, 4)
-	
-	if not $Area2D: return
-	
-	for i in range(1,5):
-		$Area2D.set_collision_layer_value(i, i==layer_id)
-		$Area2D.set_collision_mask_value(i, i==layer_id)
-		set_visibility_layer_bit(i-1, i==layer_id)
-
-
 func set_node_count(new_val):
 	node_count = new_val
 	generate_polygon()
@@ -99,12 +90,6 @@ func set_node_count(new_val):
 func set_initial_shape_radius(new_val):
 	initial_shape_radius = new_val
 	shape_radius = initial_shape_radius
-	
-	if has_node("Area2D/CollisionShape2D"):
-		var collision_shape : CollisionShape2D = $Area2D/CollisionShape2D
-		var new_circle_shape_2d = CircleShape2D.new()
-		new_circle_shape_2d.radius = initial_shape_radius
-		collision_shape.shape = new_circle_shape_2d
 
 
 func set_shape_radius(new_val):
@@ -127,32 +112,19 @@ func set_active(new_val):
 	transition_tween.tween_callback(finish_layer_transition)
 
 
-func set_enabled(new_val):
-	enabled = new_val
-	
-	if not $Area2D: return
-	if not $Particles: return
-	
-	$Area2D.monitoring = enabled
-	$Particles.emitting = enabled
-
-
 # signal functions --------------------------------------------------------------------------------------------------------
 func refresh_viewport_textures():
-	if not viewport_path: return
+	var viewport_path
+	if target_layer_id == 1:
+		viewport_path = layer_1_viewport_path
+	elif target_layer_id == 2:
+		viewport_path = layer_2_viewport_path
+	elif target_layer_id == 3:
+		viewport_path = layer_3_viewport_path
+	elif target_layer_id == 4:
+		viewport_path = layer_4_viewport_path
+	else:
+		return
 	
 	var viewport :SubViewport = get_node(viewport_path)
 	texture = viewport.get_texture()
-
-
-func _on_area_2d_body_entered(body):
-	if body.is_in_group("player") and not active:
-		active = true
-
-
-func on_start_layer_transition(new_layer_id):
-	var parent_layer = get_parent().layer_id
-	if new_layer_id != parent_layer:
-		$Area2D.monitoring = false
-	else:
-		$Area2D.monitoring = true

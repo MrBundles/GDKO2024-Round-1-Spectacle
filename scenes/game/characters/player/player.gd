@@ -118,11 +118,11 @@ func get_input(delta):
 		velocity.y += 1 * delta
 	
 	# process bumps on walls
-	if is_on_wall():
-		if velocity.x < 0:
-			velocity.x = clamp(1000 * delta, -h_vel_max, h_vel_max)
-		elif velocity.x > 0:
-			velocity.x = clamp(-1000 * delta, -h_vel_max, h_vel_max)
+	#if is_on_wall():
+		#if velocity.x < 0:
+			#velocity.x = clamp(1000 * delta, -h_vel_max, h_vel_max)
+		#elif velocity.x > 0:
+			#velocity.x = clamp(-1000 * delta, -h_vel_max, h_vel_max)
 	
 	# process coyote timer
 	if is_on_floor():
@@ -157,6 +157,4 @@ func on_start_layer_transition(new_layer_id):
 
 
 func on_finish_layer_transition(new_layer_id):
-	for i in range(1,5):
-		set_collision_layer_value(i, i==new_layer_id)
-		set_collision_mask_value(i, i==new_layer_id)
+	pass

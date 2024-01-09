@@ -26,7 +26,6 @@ func _ready():
 	# initialize variables
 	
 	# call functions
-	pass
 	custom_viewport = $SubViewport
 
 

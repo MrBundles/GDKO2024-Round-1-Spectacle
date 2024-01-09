@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 gSignals="*res://globals/global_signal_manager/global_signal_manager.gd"
+gVariables="*res://globals/global_variable_manager/global_variable_manager.gd"
 
 [display]
 

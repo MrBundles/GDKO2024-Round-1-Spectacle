@@ -1,21 +1,17 @@
-@tool
+#@tool
 #class_name name_of_class
 extends Node
 
 # purpose: 
 
 # signals ----------------------------------------------------------------------------------------------------------------
-signal refresh_viewport_textures
-signal on_set_current_layer_id										# new_layer_id
-signal start_layer_transition										# new_layer_id
-signal finish_layer_transition										# new_layer_id
 
 # enums ------------------------------------------------------------------------------------------------------------------
 
 # constants --------------------------------------------------------------------------------------------------------------
 
 # variables --------------------------------------------------------------------------------------------------------------
-
+var current_layer_id = 0 : set = set_current_layer_id
 
 # main functions ---------------------------------------------------------------------------------------------------------
 func _ready():
@@ -38,5 +34,6 @@ func _process(delta):
 
 
 # signal functions --------------------------------------------------------------------------------------------------------
-
+func set_current_layer_id(new_val):
+	current_layer_id = new_val
 

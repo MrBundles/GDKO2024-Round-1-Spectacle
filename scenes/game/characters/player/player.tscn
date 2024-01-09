@@ -4,9 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://cc5ce1epabnu" path="res://scenes/game/characters/player/player.png" id="2_4bsbq"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_wj6bs"]
-points = PackedVector2Array(32, 32, -32, 32, -32, -16, -16, -31, 16, -31, 32, -16)
+points = PackedVector2Array(31, 31, -31, 31, -31, -15, -15, -31, 15, -31, 31, -15)
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 17
 velocity = Vector2(0, 1000)
 script = ExtResource("1_i655x")
 layer_id = 1
