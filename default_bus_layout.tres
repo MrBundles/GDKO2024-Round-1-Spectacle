@@ -1,24 +1,30 @@
-[gd_resource type="AudioBusLayout" load_steps=3 format=3 uid="uid://0gfn4gu186qi"]
+[gd_resource type="AudioBusLayout" load_steps=4 format=3 uid="uid://0gfn4gu186qi"]
 
-[sub_resource type="AudioEffectHighPassFilter" id="AudioEffectHighPassFilter_xatb6"]
-resource_name = "HighPassFilter"
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_hp7js"]
+resource_name = "Reverb"
+room_size = 0.5
 
 [sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_hb8n5"]
 resource_name = "LowPassFilter"
-cutoff_hz = 215.0
-resonance = 0.98
+cutoff_hz = 1000.0
+
+[sub_resource type="AudioEffectPhaser" id="AudioEffectPhaser_3do3h"]
+resource_name = "Phaser"
+rate_hz = 0.61
 
 [resource]
+bus/0/effect/0/effect = SubResource("AudioEffectReverb_hp7js")
+bus/0/effect/0/enabled = false
+bus/0/effect/1/effect = SubResource("AudioEffectLowPassFilter_hb8n5")
+bus/0/effect/1/enabled = false
+bus/0/effect/2/effect = SubResource("AudioEffectPhaser_3do3h")
+bus/0/effect/2/enabled = false
 bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false
 bus/1/bypass_fx = false
-bus/1/volume_db = 0.0
+bus/1/volume_db = 1.85375
 bus/1/send = &"Master"
-bus/1/effect/0/effect = SubResource("AudioEffectHighPassFilter_xatb6")
-bus/1/effect/0/enabled = false
-bus/1/effect/1/effect = SubResource("AudioEffectLowPassFilter_hb8n5")
-bus/1/effect/1/enabled = false
 bus/2/name = &"Effects"
 bus/2/solo = false
 bus/2/mute = false

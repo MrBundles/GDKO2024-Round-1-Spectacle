@@ -1,6 +1,6 @@
 #@tool
 #class_name name_of_class
-extends Node
+extends Area2D
 
 # purpose: 
 
@@ -11,14 +11,16 @@ extends Node
 # constants --------------------------------------------------------------------------------------------------------------
 
 # variables --------------------------------------------------------------------------------------------------------------
+@export var layer_id = 1 : set = set_layer_id
+@export var layer_colors : Array[Color] = []
 
 
 # main functions ---------------------------------------------------------------------------------------------------------
 func _ready():
 	# connect signals
-	gSignals.start_layer_transition.connect(on_start_layer_transition)
 	
 	# initialize variables
+	layer_id = layer_id
 	
 	# call functions
 	pass
@@ -32,11 +34,15 @@ func _process(delta):
 
 
 # set/get functions -------------------------------------------------------------------------------------------------------
+func set_layer_id(new_val):
+	layer_id = new_val
+	
+	modulate = layer_colors[layer_id].lightened(.5)
+	
+	for i in range(2,6):
+		set_visibility_layer_bit(i-1, i-1 == layer_id)
 
 
 # signal functions --------------------------------------------------------------------------------------------------------
-func on_start_layer_transition(new_layer_id):
-	AudioServer.set_bus_effect_enabled(0,0,new_layer_id == 2)
-	AudioServer.set_bus_effect_enabled(0,1,new_layer_id == 3)
-	AudioServer.set_bus_effect_enabled(0,2,new_layer_id == 4)
+
 

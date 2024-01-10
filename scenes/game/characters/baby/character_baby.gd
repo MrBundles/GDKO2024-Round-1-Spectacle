@@ -85,8 +85,8 @@ func _draw():
 func set_layer_id(new_val):
 	layer_id = new_val
 	
-	for i in range(2,6):
-		set_visibility_layer_bit(i-1, i-1 == layer_id)
+	#for i in range(2,6):
+		#set_visibility_layer_bit(i-1, i-1 == layer_id)
 
 # signal functions --------------------------------------------------------------------------------------------------------
 func on_start_layer_transition(new_layer_id):

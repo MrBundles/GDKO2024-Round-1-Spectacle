@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b4y7cipya3vxn"]
 
-[ext_resource type="Script" path="res://scenes/game/characters/player/player.gd" id="1_i655x"]
+[ext_resource type="Script" path="res://scenes/game/characters/player/character_player.gd" id="1_ow0hn"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_wj6bs"]
 points = PackedVector2Array(31, 31, -31, 31, -31, -15, -15, -31, 15, -31, 31, -15)
@@ -9,10 +9,10 @@ points = PackedVector2Array(31, 31, -31, 31, -31, -15, -15, -31, 15, -31, 31, -1
 radius = 64.0
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 18
+collision_layer = 2
 collision_mask = 2
 velocity = Vector2(0, 1000)
-script = ExtResource("1_i655x")
+script = ExtResource("1_ow0hn")
 layer_id = 2
 h_accel = 4000.0
 h_decel = 3000.0
