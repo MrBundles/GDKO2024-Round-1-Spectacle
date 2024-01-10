@@ -11,7 +11,7 @@ extends CharacterBody2D
 # constants --------------------------------------------------------------------------------------------------------------
 
 # variables --------------------------------------------------------------------------------------------------------------
-@export var layer_id = 1
+@export var layer_id = 1 : set = set_layer_id
 
 @export_group("color values")
 @export var layer_colors : Array[Color] = []
@@ -21,7 +21,10 @@ var height : float = 32
 var delta_height : float = 1
 var target_height : float = 32
 var width : float = 32
-var rest_undulation_mult = 1
+var rest_undulation_mult : float = 1
+var rand_undulation_mult : float = 1
+
+var rand = RandomNumberGenerator.new()
 
 
 # main functions ---------------------------------------------------------------------------------------------------------
@@ -29,16 +32,18 @@ func _ready():
 	# connect signals
 	gSignals.start_layer_transition.connect(on_start_layer_transition)
 	
-	# initialize variables
+	# initialize variables	
+	rand.randomize()
+	rand_undulation_mult += randf_range(-.2, -.1)
 	
 	# call functions
-	pass
+	
 
 
 func _process(delta):
 	# update width and height values
 	rest_undulation_mult = clamp(rest_undulation_mult + 200 * delta, 0, 300)
-	target_height = 32 + sin(Time.get_ticks_msec() / 90) * rest_undulation_mult * delta
+	target_height = 32 + sin(Time.get_ticks_msec() / 90 * rand_undulation_mult) * rest_undulation_mult * delta
 	delta_height = lerpf(delta_height, (height - target_height) * 0.5, 8 * delta)
 	height -= delta_height
 	width = 1024 / height
@@ -77,12 +82,16 @@ func _draw():
 
 
 # set/get functions -------------------------------------------------------------------------------------------------------
-
+func set_layer_id(new_val):
+	layer_id = new_val
+	
+	for i in range(2,6):
+		set_visibility_layer_bit(i-1, i-1 == layer_id)
 
 # signal functions --------------------------------------------------------------------------------------------------------
 func on_start_layer_transition(new_layer_id):
 	layer_id = new_layer_id
 	
-	for i in range(1,5):
-		set_collision_layer_value(i, i==new_layer_id)
-		set_collision_mask_value(i, i==new_layer_id)
+	#for i in range(1,5):
+		#set_collision_layer_value(i, i==new_layer_id)
+		#set_collision_mask_value(i, i==new_layer_id)
