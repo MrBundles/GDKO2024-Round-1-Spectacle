@@ -1,4 +1,4 @@
-@tool
+#@tool
 #class_name name_of_class
 extends CharacterBody2D
 
@@ -40,7 +40,6 @@ var trail_node_list = []
 var previous_valid_trail_node = {}
 
 
-
 # main functions ---------------------------------------------------------------------------------------------------------
 func _ready():
 	# connect signals
@@ -60,6 +59,7 @@ func _process(delta):
 		move_and_slide()
 	
 	update_squish(delta)
+	update_slime_slide_sound(delta)
 	add_trail_node()
 	update_babies()
 	queue_redraw()
@@ -137,6 +137,14 @@ func get_input(delta):
 		jump_cancel_flag = false
 	else:
 		velocity.y = clamp(velocity.y + gravity * delta, -v_vel_max, v_vel_max)
+
+
+func update_slime_slide_sound(delta):
+	var target_volume = -50
+	if is_on_floor() and abs(velocity.x) > 1:
+		target_volume = -10
+	
+	$SlimeSlide.volume_db = clamp(lerpf($SlimeSlide.volume_db, target_volume, 1 * delta), -50, 0)
 
 
 func update_babies():
