@@ -150,6 +150,10 @@ func update_slime_slide_sound(delta):
 func update_babies():
 	for i in range(baby_list.size()):
 		var baby = baby_list[i]
+		if not baby:
+			baby_list.remove_at(baby_list.find(baby))
+			return
+		
 		var current_pos_id = 0
 		var target_pos_id = 0
 		var offset = Vector2(0, 16)
@@ -228,6 +232,8 @@ func on_start_layer_transition(new_layer_id):
 	for i in range(1,5):
 		set_collision_layer_value(i, i==new_layer_id)
 		set_collision_mask_value(i, i==new_layer_id)
+		$Area2D.set_collision_layer_value(i+4, i==new_layer_id)
+		$Area2D.set_collision_mask_value(i+4, i==new_layer_id)
 
 
 func on_finish_layer_transition(new_layer_id):

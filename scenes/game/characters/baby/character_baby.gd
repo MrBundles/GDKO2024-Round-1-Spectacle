@@ -1,4 +1,4 @@
-#@tool
+@tool
 #class_name name_of_class
 extends CharacterBody2D
 
@@ -56,11 +56,11 @@ func _draw():
 	# draw head
 	#draw_rect(Rect2(-Vector2(-16, height - 32), Vector2(width, height / 2)), color.lightened(.5), true)
 	#draw_arc(Vector2(0, -height / 2 + 32), width / 4.0, deg_to_rad(5.0), deg_to_rad(-185.0), 32, color.darkened(.2), width / 2, true)
-	draw_arc(Vector2(0, -height * 1.5 + 48), width / 4.0, deg_to_rad(5), deg_to_rad(-185.0), 32, color.lightened(.2), (width - 4) / 2, true)
+	draw_arc(Vector2(0, -height * 1.5 + 48), width / 4.0, deg_to_rad(5), deg_to_rad(-185.0), 32, color.lightened(0), (width - 4) / 2, true)
 	
 	# draw body
 	#draw_rect(Rect2(-Vector2(width, height-64) / 2, Vector2(width, height / 2)), color, true)
-	draw_rect(Rect2(Vector2(-width / 2, -height * 1.5 + 48), Vector2(width, height * 1.5 - 32)), color.lightened(.2), true)
+	draw_rect(Rect2(Vector2(-width / 2, -height * 1.5 + 48), Vector2(width, height * 1.5 - 32)), color.lightened(0), true)
 	
 	# draw eye
 	#var eye_position = Vector2(velocity.x / h_vel_max * 16, 16 - width*.5)
@@ -85,14 +85,12 @@ func _draw():
 func set_layer_id(new_val):
 	layer_id = new_val
 	
-	for i in range(2,6):
-		set_visibility_layer_bit(i-1, i-1 == layer_id)
+	for i in range(1,5):
+		set_visibility_layer_bit(i-1, i == layer_id)
+		set_collision_layer_value(i+4, i == layer_id)
+		set_collision_mask_value(i+4, i == layer_id)
 
 # signal functions --------------------------------------------------------------------------------------------------------
 func on_start_layer_transition(new_layer_id):
-	pass
 	#layer_id = new_layer_id
-	
-	#for i in range(1,5):
-		#set_collision_layer_value(i, i==new_layer_id)
-		#set_collision_mask_value(i, i==new_layer_id)
+	pass

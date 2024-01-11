@@ -9,6 +9,7 @@ signal refresh_viewport_textures
 signal on_set_current_layer_id										# new_layer_id
 signal start_layer_transition										# new_layer_id
 signal finish_layer_transition										# new_layer_id
+signal level_win
 
 # enums ------------------------------------------------------------------------------------------------------------------
 

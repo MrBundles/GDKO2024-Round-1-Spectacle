@@ -17,3 +17,4 @@ layer_colors = Array[Color]([Color(1, 1, 1, 1), Color(0.0666667, 0.541176, 0.698
 shape = SubResource("ConvexPolygonShape2D_wj6bs")
 
 [node name="PopParticles" type="CPUParticles2D" parent="."]
+emitting = false
