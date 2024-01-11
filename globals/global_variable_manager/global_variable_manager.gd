@@ -1,4 +1,4 @@
-#@tool
+@tool
 #class_name name_of_class
 extends Node
 
@@ -11,7 +11,7 @@ extends Node
 # constants --------------------------------------------------------------------------------------------------------------
 
 # variables --------------------------------------------------------------------------------------------------------------
-var current_layer_id = 0 : set = set_current_layer_id
+var current_layer_id : int = 0 : set = set_current_layer_id
 
 # main functions ---------------------------------------------------------------------------------------------------------
 func _ready():
@@ -36,4 +36,5 @@ func _process(delta):
 # signal functions --------------------------------------------------------------------------------------------------------
 func set_current_layer_id(new_val):
 	current_layer_id = new_val
-
+	print("gvm")
+	gSignals.on_set_current_layer_id.emit(current_layer_id)

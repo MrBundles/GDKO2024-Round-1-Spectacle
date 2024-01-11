@@ -19,7 +19,7 @@ extends TextureRect
 func _ready():
 	# connect signals
 	gSignals.refresh_viewport_textures.connect(refresh_viewport_textures)
-	gSignals.finish_layer_transition.connect(finish_layer_transition)
+	gSignals.on_set_current_layer_id.connect(on_set_current_layer_id)
 	
 	# initialize variables
 	
@@ -44,8 +44,8 @@ func refresh_viewport_textures():
 	texture = viewport.get_texture()
 
 
-func finish_layer_transition(new_layer_id):
-	if new_layer_id == layer_id:
+func on_set_current_layer_id(current_layer_id):
+	if current_layer_id == layer_id:
 		z_index = 1
 	else:
 		z_index = 0
