@@ -1,6 +1,6 @@
-@tool
+#@tool
 #class_name name_of_class
-extends Node
+extends Node2D
 
 # purpose: 
 
@@ -11,7 +11,7 @@ extends Node
 # constants --------------------------------------------------------------------------------------------------------------
 
 # variables --------------------------------------------------------------------------------------------------------------
-
+@export var layer_id = 1 : set = set_layer_id
 
 # main functions ---------------------------------------------------------------------------------------------------------
 func _ready():
@@ -32,12 +32,14 @@ func _process(delta):
 
 
 # set/get functions -------------------------------------------------------------------------------------------------------
-
+func set_layer_id(new_val):
+	layer_id = new_val
+	
+	for child in get_children():
+		if not "wheel_layer_id" in child: return
+		child.wheel_layer_id = layer_id
 
 # signal functions --------------------------------------------------------------------------------------------------------
 func on_start_layer_transition(new_layer_id):
-	pass
-	#AudioServer.set_bus_effect_enabled(0,0,new_layer_id == 2)
-	#AudioServer.set_bus_effect_enabled(0,1,new_layer_id == 3)
-	#AudioServer.set_bus_effect_enabled(0,2,new_layer_id == 4)
+	layer_id = new_layer_id
 

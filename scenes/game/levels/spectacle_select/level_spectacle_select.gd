@@ -12,6 +12,7 @@ extends Area2D
 
 # variables --------------------------------------------------------------------------------------------------------------
 @export var layer_id = 1
+var wheel_layer_id = 1
 @export var layer_colors : Array[Color] = []
 var hovered = false
 var clicked = false : set = set_clicked
@@ -38,8 +39,9 @@ func _process(delta):
 
 
 func _draw():
+	#draw_circle(Vector2(-length_current, 0), length_current * tan(deg_to_rad(11.25)), layer_colors[layer_id])
 	draw_arc(Vector2.ZERO, length_current / 2, deg_to_rad(168.75), deg_to_rad(191.25), 32, layer_colors[layer_id], length_current, true)
-	draw_arc(Vector2.ZERO, 50, deg_to_rad(165), deg_to_rad(195), 32, layer_colors[gVariables.current_layer_id], 100, true)
+	draw_arc(Vector2.ZERO, 50, deg_to_rad(167.25), deg_to_rad(192.75), 32, layer_colors[wheel_layer_id], 100, true)
 
 
 # helper functions --------------------------------------------------------------------------------------------------------

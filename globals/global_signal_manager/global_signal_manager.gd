@@ -11,6 +11,7 @@ signal start_layer_transition										# new_layer_id
 signal finish_layer_transition										# new_layer_id
 signal level_win
 signal spectacle_select_layer										# new_layer_id
+signal reset_level
 
 # enums ------------------------------------------------------------------------------------------------------------------
 

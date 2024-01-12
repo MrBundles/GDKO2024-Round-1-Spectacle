@@ -1,18 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://cnmeffobujp1t"]
+[gd_scene load_steps=9 format=3 uid="uid://cnmeffobujp1t"]
 
 [ext_resource type="Script" path="res://scenes/game/levels/layer/level_layer.gd" id="1_g48wu"]
 [ext_resource type="PackedScene" uid="uid://lsmndfoik8sr" path="res://scenes/main/tilemap/main_tilemap.tscn" id="2_82jaw"]
+[ext_resource type="PackedScene" uid="uid://bocymvy4njvqy" path="res://scenes/menu/resources/jelly_button/jelly_button.tscn" id="3_8yfxx"]
+[ext_resource type="Texture2D" uid="uid://dlb04dtrqc5l5" path="res://scenes/game/objects/portal/object_portal.png" id="3_fdhh5"]
+[ext_resource type="FontFile" uid="uid://q6oqiulieari" path="res://assets/graphics/fonts/roboto/Roboto-Bold.ttf" id="4_yk4yn"]
 
-[sub_resource type="TileSet" id="TileSet_ynuvg"]
+[sub_resource type="TileSet" id="TileSet_tuptp"]
 resource_local_to_scene = true
 tile_size = Vector2i(64, 64)
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.776471, 0.0470588, 0, 1)
 
+[sub_resource type="Curve" id="Curve_vj763"]
+max_value = 10.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.510204, 4.21728), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_10nda"]
+font = ExtResource("4_yk4yn")
+font_size = 64
+
 [node name="Layer" type="CanvasLayer"]
 layer = 0
-visible = false
 script = ExtResource("1_g48wu")
 layer_id = null
 layer_colors = Array[Color]([Color(1, 1, 1, 1), Color(0.0666667, 0.541176, 0.698039, 1), Color(1, 0.819608, 0.4, 1), Color(0.0235294, 0.839216, 0.627451, 1), Color(0.937255, 0.278431, 0.435294, 1)])
@@ -32,7 +43,67 @@ mouse_filter = 2
 metadata/_edit_lock_ = true
 
 [node name="LevelTilemap" parent="." instance=ExtResource("2_82jaw")]
-tile_set = SubResource("TileSet_ynuvg")
+z_index = 1
+tile_set = SubResource("TileSet_tuptp")
 collision_visibility_mode = 2
 layer_0/tile_data = PackedInt32Array(0, 1, 0, 65536, 1, 0, 131072, 1, 0, 196608, 1, 0, 262144, 1, 0, 327680, 1, 0, 393216, 1, 0, 458752, 1, 0, 524288, 1, 0, 589824, 1, 0, 655360, 1, 0, 720896, 1, 0, 786432, 1, 0, 851968, 1, 0, 917504, 1, 0, 983040, 1, 0, 1048576, 1, 0, 1048577, 1, 0, 1048578, 1, 0, 1048579, 1, 0, 1048580, 1, 0, 1048581, 1, 0, 1048582, 1, 0, 1048583, 1, 0, 1048584, 1, 0, 1048585, 1, 0, 1048586, 1, 0, 1048587, 1, 0, 1048588, 1, 0, 1048589, 1, 0, 1048590, 1, 0, 1048591, 1, 0, 1048592, 1, 0, 1048593, 1, 0, 1048594, 1, 0, 1048595, 1, 0, 1048596, 1, 0, 1048597, 1, 0, 1048598, 1, 0, 1048599, 1, 0, 1048600, 1, 0, 1048601, 1, 0, 1048602, 1, 0, 1048603, 1, 0, 1048604, 1, 0, 1048605, 1, 0, 983069, 1, 0, 917533, 1, 0, 851997, 1, 0, 786461, 1, 0, 720925, 1, 0, 655389, 1, 0, 589853, 1, 0, 524317, 1, 0, 458781, 1, 0, 393245, 1, 0, 327709, 1, 0, 262173, 1, 0, 196637, 1, 0, 131101, 1, 0, 65565, 1, 0, 29, 1, 0, 851969, 1, 0, 851970, 1, 0, 851971, 1, 0, 851972, 1, 0, 851973, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 458761, 1, 0, 458762, 1, 0, 458763, 1, 0, 458764, 1, 0, 458765, 1, 0, 458766, 1, 0, 458767, 1, 0, 458768, 1, 0, 458769, 1, 0, 458770, 1, 0, 458771, 1, 0, 655376, 1, 0, 655377, 1, 0, 720913, 1, 0, 720914, 1, 0, 720915, 1, 0, 720916, 1, 0, 917520, 1, 0, 917521, 1, 0, 917522, 1, 0, 917523, 1, 0, 917524, 1, 0, 262170, 1, 0, 262169, 1, 0, 262168, 1, 0, 262167, 1, 0, 262166, 1, 0, 262165, 1, 0, 196615, 1, 0, 196614, 1, 0, 196613, 1, 0, 196612, 1, 0, 196611, 1, 0, 196610, 1, 0)
+metadata/_edit_lock_ = true
+
+[node name="BackgroundParticles" type="CPUParticles2D" parent="."]
+position = Vector2(960, 540)
+amount = 50
+lifetime = 30.0
+preprocess = 30.0
+texture = ExtResource("3_fdhh5")
+emission_shape = 3
+emission_rect_extents = Vector2(1920, 1080)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 100.0
+scale_amount_curve = SubResource("Curve_vj763")
+color = Color(0.027451, 0.231373, 0.298039, 1)
+
+[node name="Control" type="Control" parent="."]
+visibility_layer = 15
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1088.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+visibility_layer = 15
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+metadata/_edit_lock_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer"]
+visibility_layer = 15
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="JellyButton" parent="Control/MarginContainer/HBoxContainer" instance=ExtResource("3_8yfxx")]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Title" type="Label" parent="Control/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Title"
+label_settings = SubResource("LabelSettings_10nda")
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_lock_ = true

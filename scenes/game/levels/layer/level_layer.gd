@@ -45,6 +45,12 @@ func set_layer_id(new_val):
 	if layer_id > -1 and layer_id < layer_colors.size():
 		$ColorRect.modulate = layer_colors[layer_id].darkened(.5)
 		$LevelTilemap.modulate = layer_colors[layer_id]
+		$Control/MarginContainer/HBoxContainer/Title.modulate = layer_colors[layer_id]
+		$BackgroundParticles.color = layer_colors[layer_id].darkened(.55)
+	
+	for i in range(1,5):
+		$Control/MarginContainer/HBoxContainer/Title.set_visibility_layer_bit(i-1, i == layer_id)
+		$BackgroundParticles.set_visibility_layer_bit(i-1, i == layer_id)
 
 # signal functions --------------------------------------------------------------------------------------------------------
 func on_set_current_layer_id(new_layer_id):
