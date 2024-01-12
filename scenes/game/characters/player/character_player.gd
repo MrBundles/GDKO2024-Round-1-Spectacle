@@ -12,6 +12,7 @@ extends CharacterBody2D
 
 # variables --------------------------------------------------------------------------------------------------------------
 @export var layer_id = 0 : set = set_layer_id
+var rand = RandomNumberGenerator.new()
 
 @export_group("movement values")
 @export var h_accel = 10.0
@@ -38,6 +39,7 @@ var rest_undulation_mult = 1
 @export var baby_list : Array = []
 var trail_node_list = []
 var previous_valid_trail_node = {}
+var msecs_since_last_move : float = 0
 
 
 # main functions ---------------------------------------------------------------------------------------------------------
@@ -61,7 +63,7 @@ func _process(delta):
 	update_squish(delta)
 	update_slime_slide_sound(delta)
 	add_trail_node()
-	update_babies()
+	update_babies(delta)
 	queue_redraw()
 
 func _draw():
@@ -79,14 +81,11 @@ func _draw():
 			draw_circle(node["pos"] - global_position, 8, node_color)
 	
 	# draw head
-	#draw_rect(Rect2(-Vector2(-16, height - 32), Vector2(width, height / 2)), color.lightened(.5), true)
-	#draw_arc(Vector2(0, -height / 2 + 32), width / 4.0, deg_to_rad(5.0), deg_to_rad(-185.0), 32, color.darkened(.2), width / 2, true)
 	var start_angle = deg_to_rad(5)
 	var end_angle = deg_to_rad(-185.0)
 	draw_arc(Vector2(0, -height * 1.5 + 96), width / 4.0, start_angle, end_angle, 32, color, (width - 4) / 2, true)
 	
 	# draw body
-	#draw_rect(Rect2(-Vector2(width, height-64) / 2, Vector2(width, height / 2)), color, true)
 	draw_rect(Rect2(Vector2(-width / 2, -height * 1.5 + 96), Vector2(width, height * 1.5 - 64)), color, true)
 	
 	# draw eye
@@ -95,13 +94,6 @@ func _draw():
 	#draw_circle(eye_position, 16, color)
 	draw_circle(eye_position, 8, color.lightened(.6))
 	draw_circle(eye_position, 4, color.darkened(.5))
-	
-	# draw glasses
-	var spectacle_size = Vector2(24, 24)
-	var spectacle_thickness = 3.0
-	#draw_rect(Rect2(eye_position - spectacle_size / 2, spectacle_size), color.darkened(.5), false, spectacle_thickness)
-	#draw_line(eye_position + Vector2(-spectacle_size.x / 2, 0), eye_position + Vector2(-32, -2), color.darkened(.5), spectacle_thickness)
-	#draw_line(eye_position + Vector2(spectacle_size.x / 2, 0), eye_position + Vector2(32, -2), color.darkened(.5), spectacle_thickness)
 
 
 # helper functions --------------------------------------------------------------------------------------------------------
@@ -137,6 +129,14 @@ func get_input(delta):
 		jump_cancel_flag = false
 	else:
 		velocity.y = clamp(velocity.y + gravity * delta, -v_vel_max, v_vel_max)
+	
+	# this is super jank... forgive me
+	# in order to get the path following to work for the little squishes we need to introduce some minor jitter into the movement
+	# this is to decrease the liklihood of repeats in the list of player positions
+	# there are better ways of solving this problem... we will not be implementing them today...
+	rand.randomize()
+	velocity.x += rand.randf_range(-.01, .01)
+	velocity.y += rand.randf_range(-.01, .01)
 
 
 func update_slime_slide_sound(delta):
@@ -147,7 +147,12 @@ func update_slime_slide_sound(delta):
 	$SlimeSlide.volume_db = clamp(lerpf($SlimeSlide.volume_db, target_volume, 1 * delta), -50, 0)
 
 
-func update_babies():
+func update_babies(delta):
+	msecs_since_last_move += delta
+	if msecs_since_last_move < .01: return
+	
+	msecs_since_last_move = 0
+	
 	for i in range(baby_list.size()):
 		var baby = baby_list[i]
 		if not baby:
@@ -234,6 +239,9 @@ func on_start_layer_transition(new_layer_id):
 		set_collision_mask_value(i, i==new_layer_id)
 		$Area2D.set_collision_layer_value(i+4, i==new_layer_id)
 		$Area2D.set_collision_mask_value(i+4, i==new_layer_id)
+	
+	baby_list.clear()
+	trail_node_list.clear()
 
 
 func on_finish_layer_transition(new_layer_id):

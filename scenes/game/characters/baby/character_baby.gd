@@ -1,4 +1,4 @@
-@tool
+#@tool
 #class_name name_of_class
 extends CharacterBody2D
 
@@ -39,7 +39,6 @@ func _ready():
 	# call functions
 	
 
-
 func _process(delta):
 	# update width and height values
 	rest_undulation_mult = clamp(rest_undulation_mult + 200 * delta, 0, 300)
@@ -54,28 +53,15 @@ func _draw():
 	var color = layer_colors[layer_id]
 	
 	# draw head
-	#draw_rect(Rect2(-Vector2(-16, height - 32), Vector2(width, height / 2)), color.lightened(.5), true)
-	#draw_arc(Vector2(0, -height / 2 + 32), width / 4.0, deg_to_rad(5.0), deg_to_rad(-185.0), 32, color.darkened(.2), width / 2, true)
 	draw_arc(Vector2(0, -height * 1.5 + 48), width / 4.0, deg_to_rad(5), deg_to_rad(-185.0), 32, color.lightened(0), (width - 4) / 2, true)
 	
 	# draw body
-	#draw_rect(Rect2(-Vector2(width, height-64) / 2, Vector2(width, height / 2)), color, true)
 	draw_rect(Rect2(Vector2(-width / 2, -height * 1.5 + 48), Vector2(width, height * 1.5 - 32)), color.lightened(0), true)
 	
 	# draw eye
-	#var eye_position = Vector2(velocity.x / h_vel_max * 16, 16 - width*.5)
 	var eye_position = Vector2(0, 32 - height*1.25)
-	#draw_circle(eye_position, 16, color)
 	draw_circle(eye_position, 6, color.lightened(.6))
 	draw_circle(eye_position, 3, color.darkened(.5))
-	
-	# draw glasses
-	var spectacle_size = Vector2(24, 24)
-	var spectacle_thickness = 3.0
-	#draw_rect(Rect2(eye_position - spectacle_size / 2, spectacle_size), color.darkened(.5), false, spectacle_thickness)
-	#draw_line(eye_position + Vector2(-spectacle_size.x / 2, 0), eye_position + Vector2(-32, -2), color.darkened(.5), spectacle_thickness)
-	#draw_line(eye_position + Vector2(spectacle_size.x / 2, 0), eye_position + Vector2(32, -2), color.darkened(.5), spectacle_thickness)
-	
 
 
 # helper functions --------------------------------------------------------------------------------------------------------

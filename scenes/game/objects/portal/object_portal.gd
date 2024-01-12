@@ -1,4 +1,4 @@
-@tool
+#@tool
 #class_name name_of_class
 extends Area2D
 
@@ -13,6 +13,7 @@ extends Area2D
 # variables --------------------------------------------------------------------------------------------------------------
 @export var layer_id = 1 : set = set_layer_id
 @export var layer_colors : Array[Color] = []
+var exit_flag = false
 
 
 # main functions ---------------------------------------------------------------------------------------------------------
@@ -43,6 +44,8 @@ func set_layer_id(new_val):
 		set_visibility_layer_bit(i-1, i == layer_id)
 		$CPUParticles2D.set_visibility_layer_bit(i-1, i == layer_id)
 		$EventParticles.set_visibility_layer_bit(i-1, i == layer_id)
+		set_collision_layer_value(i, i == layer_id)
+		set_collision_mask_value(i, i == layer_id)
 		set_collision_layer_value(i+4, i == layer_id)
 		set_collision_mask_value(i+4, i == layer_id)
 
@@ -56,4 +59,10 @@ func _on_body_entered(body):
 		await get_tree().create_timer(0.5).timeout
 		var baby_count = get_tree().get_nodes_in_group("baby").size()
 		if baby_count < 1:
-			gSignals.level_win.emit()
+			modulate = layer_colors[layer_id].lightened(1)
+			exit_flag = true
+	
+	elif body.is_in_group("player") and exit_flag:
+		$EventParticles.emitting = true
+		gSignals.level_win.emit()
+		print("you win!")

@@ -24,8 +24,8 @@
      inkscape:deskcolor="#484848"
      inkscape:document-units="px"
      inkscape:zoom="1.0897757"
-     inkscape:cx="-185.35924"
-     inkscape:cy="463.85692"
+     inkscape:cx="0"
+     inkscape:cy="428.06974"
      inkscape:window-width="1920"
      inkscape:window-height="1121"
      inkscape:window-x="2391"
@@ -79,6 +79,16 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <rect
+       style="fill:#ff00ff;stroke-width:0.77614;stroke-linecap:round;stroke-opacity:0.345098;fill-opacity:0"
+       id="rect3"
+       width="118.53333"
+       height="118.53333"
+       x="-101.6"
+       y="50.799995"
+       inkscape:export-filename="..\..\..\scenes\main\tileset\rounded_tileset.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
     <rect
        style="fill:#ef476f;stroke-width:0.757502;stroke-linecap:round;stroke-opacity:0.345098;fill-opacity:1"
        id="rect1"

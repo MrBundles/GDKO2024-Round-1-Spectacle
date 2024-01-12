@@ -42,6 +42,7 @@ var transition_tween : Tween
 func _ready():
 	# connect signals
 	gSignals.refresh_viewport_textures.connect(refresh_viewport_textures)
+	gSignals.spectacle_select_layer.connect(on_spectacle_select_layer)
 	
 	# initialize variables
 	current_radius = 0
@@ -57,7 +58,7 @@ func _process(delta):
 	current_radius = lerpf(current_radius, target_radius, 10 * delta)
 	
 	queue_redraw()
-	get_input()
+	get_input(0)
 
 
 func _draw():
@@ -77,12 +78,9 @@ func generate_polygon():
 		polygon_points.append(Vector2(current_radius, 0).rotated(node_angle))
 	
 	set_polygon(PackedVector2Array(polygon_points))
-	
-	if not $Particles: return
-	$Particles.emission_points = PackedVector2Array(polygon_points)
 
 
-func get_input():
+func get_input(new_layer_id):
 	if target_radius == transition_radius:
 		return
 	
@@ -94,7 +92,8 @@ func get_input():
 	if Input.is_action_just_pressed("spectacle_cancel") and enabled:
 		enabled = false
 	
-	if Input.is_action_just_pressed("spectacle_select_layer_1"):
+	if Input.is_action_just_pressed("spectacle_select_layer_1") or new_layer_id == 1:
+		print("success")
 		if gVariables.current_layer_id == 1:
 			enabled = false
 		elif target_layer_id == 1:
@@ -102,7 +101,7 @@ func get_input():
 		else:
 			enabled = true
 			target_layer_id = 1
-	elif Input.is_action_just_pressed("spectacle_select_layer_2"):
+	elif Input.is_action_just_pressed("spectacle_select_layer_2") or new_layer_id == 2:
 		if gVariables.current_layer_id == 2:
 			enabled = false
 		elif target_layer_id == 2:
@@ -110,7 +109,7 @@ func get_input():
 		else:
 			enabled = true
 			target_layer_id = 2
-	elif Input.is_action_just_pressed("spectacle_select_layer_3"):
+	elif Input.is_action_just_pressed("spectacle_select_layer_3") or new_layer_id == 3:
 		if gVariables.current_layer_id == 3:
 			enabled = false
 		elif target_layer_id == 3:
@@ -118,7 +117,7 @@ func get_input():
 		else:
 			enabled = true
 			target_layer_id = 3
-	elif Input.is_action_just_pressed("spectacle_select_layer_4"):
+	elif Input.is_action_just_pressed("spectacle_select_layer_4") or new_layer_id == 4:
 		if gVariables.current_layer_id == 4:
 			enabled = false
 		elif target_layer_id == 4:
@@ -126,6 +125,7 @@ func get_input():
 		else:
 			enabled = true
 			target_layer_id = 4
+
 
 # set/get functions -------------------------------------------------------------------------------------------------------
 func set_node_count(new_val):
@@ -176,3 +176,7 @@ func refresh_viewport_textures():
 	if not viewport_path: return
 	var viewport :SubViewport = get_node(viewport_path)
 	texture = viewport.get_texture()
+
+
+func on_spectacle_select_layer(new_layer_id):
+	get_input(new_layer_id)

@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bocymvy4njvqy"]
+
+[ext_resource type="Script" path="res://scenes/menu/resources/jelly_button/menu_jelly_button.gd" id="1_6djyg"]
+[ext_resource type="FontFile" uid="uid://cwruuygjh2sdf" path="res://assets/graphics/fonts/roboto/Roboto-Regular.ttf" id="1_sq3ob"]
+
+[node name="JellyButton" type="Button"]
+custom_minimum_size = Vector2(64, 64)
+pivot_offset = Vector2(32, 32)
+theme_override_fonts/font = ExtResource("1_sq3ob")
+theme_override_font_sizes/font_size = 48
+text = "Jelly"
+script = ExtResource("1_6djyg")
+
+[node name="Node2D" type="Node2D" parent="."]
+show_behind_parent = true
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="draw" from="Node2D" to="." method="_on_node_2d_draw"]

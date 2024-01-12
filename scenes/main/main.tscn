@@ -9,6 +9,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
 script = ExtResource("1_eluy0")
 metadata/_edit_lock_ = true
 
@@ -23,6 +24,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="UI_Layer/UI_Container"]
 layout_mode = 1
@@ -31,6 +33,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
@@ -38,3 +41,4 @@ theme_override_constants/margin_bottom = 32
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI_Layer/UI_Container/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
