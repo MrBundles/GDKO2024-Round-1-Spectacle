@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwcxdvdkhyg64"]
+
+[ext_resource type="PackedScene" uid="uid://bbq5duc4x5e7i" path="res://scenes/game/levels/level.tscn" id="1_5t38x"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_h7nvj"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7rk0e"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7yx3s"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_68cle"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Level05" instance=ExtResource("1_5t38x")]
+
+[node name="TextureRectLayer1" parent="Layers" index="0"]
+texture = SubResource("ViewportTexture_h7nvj")
+
+[node name="TextureRectLayer2" parent="Layers" index="1"]
+texture = SubResource("ViewportTexture_7rk0e")
+
+[node name="TextureRectLayer3" parent="Layers" index="2"]
+texture = SubResource("ViewportTexture_7yx3s")
+
+[node name="TextureRectLayer4" parent="Layers" index="3"]
+texture = SubResource("ViewportTexture_68cle")
+
+[editable path="Layer1"]
+[editable path="Layer2"]
+[editable path="Layer3"]
+[editable path="Layer4"]

@@ -1,4 +1,4 @@
-#@tool
+@tool
 #class_name name_of_class
 extends CharacterBody2D
 

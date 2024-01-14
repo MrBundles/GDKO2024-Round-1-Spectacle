@@ -1,4 +1,4 @@
-#@tool
+@tool
 #class_name name_of_class
 extends Area2D
 
@@ -7,13 +7,18 @@ extends Area2D
 # signals ----------------------------------------------------------------------------------------------------------------
 
 # enums ------------------------------------------------------------------------------------------------------------------
+enum PORTAL_TYPES {exit, level_select}
 
 # constants --------------------------------------------------------------------------------------------------------------
 
 # variables --------------------------------------------------------------------------------------------------------------
 @export var layer_id = 1 : set = set_layer_id
+@export var portal_type : PORTAL_TYPES = 0
 @export var layer_colors : Array[Color] = []
 var exit_flag = false
+
+@export_group("level select values")
+@export var level_id = 0
 
 
 # main functions ---------------------------------------------------------------------------------------------------------
@@ -24,7 +29,7 @@ func _ready():
 	layer_id = layer_id
 	
 	# call functions
-	pass
+	check_exit_flag()
 
 
 func _process(delta):
@@ -32,7 +37,12 @@ func _process(delta):
 
 
 # helper functions --------------------------------------------------------------------------------------------------------
-
+func check_exit_flag():
+	await get_tree().create_timer(0.5).timeout
+	var baby_count = get_tree().get_nodes_in_group("baby").size()
+	if baby_count < 1:
+		modulate = layer_colors[layer_id].lightened(1)
+		exit_flag = true
 
 # set/get functions -------------------------------------------------------------------------------------------------------
 func set_layer_id(new_val):
@@ -52,17 +62,24 @@ func set_layer_id(new_val):
 
 # signal functions --------------------------------------------------------------------------------------------------------
 func _on_body_entered(body):
-	if body.is_in_group("baby"):
-		body.queue_free()
-		$EventParticles.emitting = true
+	match portal_type:
+		PORTAL_TYPES.exit:
+			if body.is_in_group("baby"):
+				body.queue_free()
+				$EventParticles.emitting = true
+				check_exit_flag()
+			
+			elif body.is_in_group("player") and exit_flag:
+				body.queue_free()
+				$EventParticles.emitting = true
+				gSignals.level_win.emit()
+				
+				await get_tree().create_timer(1.0).timeout
+				var current_level_id = gVariables.current_level_id
+				gVariables.current_level_id = current_level_id + 1
 		
-		await get_tree().create_timer(0.5).timeout
-		var baby_count = get_tree().get_nodes_in_group("baby").size()
-		if baby_count < 1:
-			modulate = layer_colors[layer_id].lightened(1)
-			exit_flag = true
-	
-	elif body.is_in_group("player") and exit_flag:
-		$EventParticles.emitting = true
-		gSignals.level_win.emit()
-		print("you win!")
+		PORTAL_TYPES.level_select:
+			body.queue_free()
+			$EventParticles.emitting = true
+			await get_tree().create_timer(1.0).timeout
+			gVariables.current_level_id = level_id

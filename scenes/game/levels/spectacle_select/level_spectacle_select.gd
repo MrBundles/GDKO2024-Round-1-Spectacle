@@ -76,6 +76,7 @@ func set_clicked(new_val):
 
 # signal functions --------------------------------------------------------------------------------------------------------
 func _on_mouse_entered():
+	if layer_id == 0: return
 	if gVariables.current_layer_id == layer_id: return
 	hovered = true
 	update_length()

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0y86rl87obnt"]
+
+[ext_resource type="Script" path="res://scenes/game/levels/ui_select_wheel/level_ui_wheel.gd" id="1_00rec"]
+[ext_resource type="PackedScene" uid="uid://lpvfb6d0h5t" path="res://scenes/game/levels/ui_select/ui_select.tscn" id="2_myjbj"]
+
+[node name="UIWheel" type="Node2D"]
+script = ExtResource("1_00rec")
+
+[node name="Back" parent="." instance=ExtResource("2_myjbj")]
+rotation = 1.9635
+
+[node name="Reset" parent="." instance=ExtResource("2_myjbj")]
+rotation = 2.74889
+ui_type = 1

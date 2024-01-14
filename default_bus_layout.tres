@@ -2,7 +2,7 @@
 
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_hp7js"]
 resource_name = "Reverb"
-room_size = 0.5
+room_size = 0.38
 
 [sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_hb8n5"]
 resource_name = "LowPassFilter"

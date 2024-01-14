@@ -27,7 +27,8 @@ func _ready():
 
 
 func _process(delta):
-	pass
+	if Input.is_action_just_pressed("reset_level"):
+		gSignals.reset_level.emit()
 
 
 # helper functions --------------------------------------------------------------------------------------------------------
@@ -43,9 +44,8 @@ func set_current_layer_id(new_val):
 
 
 func set_current_level_id(new_val):
-	var current_level_id = new_val
-	
-	current_level_path = "res://scenes/game/levels/levels/level_" + str(current_level_id).pad_zeros(2)
+	current_level_id = new_val
+	current_level_path = "res://scenes/game/levels/levels/level_" + str(current_level_id).pad_zeros(2) + ".tscn"
 	get_tree().change_scene_to_file(current_level_path)
 
 
