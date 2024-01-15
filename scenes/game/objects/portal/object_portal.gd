@@ -15,6 +15,7 @@ enum PORTAL_TYPES {exit, level_select}
 @export var layer_id = 1 : set = set_layer_id
 @export var portal_type : PORTAL_TYPES = 0
 @export var layer_colors : Array[Color] = []
+@export var highest_beaten_level_rqd : int = 0
 var exit_flag = false
 
 @export_group("level select values")
@@ -38,11 +39,14 @@ func _process(delta):
 
 # helper functions --------------------------------------------------------------------------------------------------------
 func check_exit_flag():
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.1).timeout
 	var baby_count = get_tree().get_nodes_in_group("baby").size()
-	if baby_count < 1:
-		modulate = layer_colors[layer_id].lightened(1)
+	if baby_count < 1 and gVariables.highest_beaten_level > highest_beaten_level_rqd - 1:
+		modulate = layer_colors[layer_id].lightened(.7)
 		exit_flag = true
+	else:
+		modulate = layer_colors[layer_id].darkened(.7)
+		exit_flag = false
 
 # set/get functions -------------------------------------------------------------------------------------------------------
 func set_layer_id(new_val):
@@ -75,11 +79,17 @@ func _on_body_entered(body):
 				gSignals.level_win.emit()
 				
 				await get_tree().create_timer(1.0).timeout
-				var current_level_id = gVariables.current_level_id
-				gVariables.current_level_id = current_level_id + 1
+				
+				if gVariables.current_level_id > gVariables.highest_beaten_level:
+					gVariables.highest_beaten_level = gVariables.current_level_id
+				
+				print(gVariables.highest_beaten_level)
+				
+				gVariables.current_level_id +=1
 		
 		PORTAL_TYPES.level_select:
-			body.queue_free()
-			$EventParticles.emitting = true
-			await get_tree().create_timer(1.0).timeout
-			gVariables.current_level_id = level_id
+			if exit_flag:
+				body.queue_free()
+				$EventParticles.emitting = true
+				await get_tree().create_timer(1.0).timeout
+				gVariables.current_level_id = level_id

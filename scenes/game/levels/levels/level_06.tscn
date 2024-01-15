@@ -2,31 +2,31 @@
 
 [ext_resource type="PackedScene" uid="uid://bbq5duc4x5e7i" path="res://scenes/game/levels/level.tscn" id="1_y77ps"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_hre5m"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_pugkm"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_p2o8d"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_nnxgc"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_icrgp"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_u8xcw"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_spr88"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_wbfbq"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Level06" instance=ExtResource("1_y77ps")]
 
 [node name="TextureRectLayer1" parent="Layers" index="0"]
-texture = SubResource("ViewportTexture_hre5m")
+texture = SubResource("ViewportTexture_pugkm")
 
 [node name="TextureRectLayer2" parent="Layers" index="1"]
-texture = SubResource("ViewportTexture_p2o8d")
+texture = SubResource("ViewportTexture_nnxgc")
 
 [node name="TextureRectLayer3" parent="Layers" index="2"]
-texture = SubResource("ViewportTexture_icrgp")
+texture = SubResource("ViewportTexture_u8xcw")
 
 [node name="TextureRectLayer4" parent="Layers" index="3"]
-texture = SubResource("ViewportTexture_spr88")
+texture = SubResource("ViewportTexture_wbfbq")
 
 [editable path="Layer1"]
 [editable path="Layer2"]

@@ -14,6 +14,7 @@ extends Node
 var current_layer_id : int = 0 : set = set_current_layer_id
 var current_level_id : int = 0 : set = set_current_level_id
 var current_level_path : String = ""
+var highest_beaten_level = 0
 
 # main functions ---------------------------------------------------------------------------------------------------------
 func _ready():

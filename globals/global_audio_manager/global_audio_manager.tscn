@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://cpi1nvp3wk7mc"]
 
 [ext_resource type="Script" path="res://globals/global_audio_manager/global_audio_manager.gd" id="1_pn8c6"]
-[ext_resource type="AudioStream" uid="uid://dlutuhqy6uqb1" path="res://assets/audio/music/A_Better_Vision v3.0.wav" id="2_ry5eb"]
+[ext_resource type="AudioStream" uid="uid://bwtxgdpcpcnd5" path="res://assets/audio/music/A Better Vision Final.wav" id="2_racyi"]
 
 [node name="GlobalAudioManager" type="Node"]
 script = ExtResource("1_pn8c6")
 
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_ry5eb")
+stream = ExtResource("2_racyi")
 autoplay = true
 bus = &"Music"

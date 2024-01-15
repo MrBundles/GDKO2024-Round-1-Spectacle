@@ -13,11 +13,12 @@ enum UI_TYPES {back, reset}
 # variables --------------------------------------------------------------------------------------------------------------
 @export var ui_type : UI_TYPES = UI_TYPES.back
 @export var layer_colors : Array[Color] = []
+@export var font : Font
 var hovered = false
 var clicked = false : set = set_clicked
-var length_normal = 150
-var length_hovered = 200
-var length_clicked = 225
+var length_normal = 100
+var length_hovered = 125
+var length_clicked = 150
 var length_current = 200
 var length_target = 200
 
@@ -38,8 +39,15 @@ func _process(delta):
 
 
 func _draw():
-	#draw_circle(Vector2(-length_current, 0), length_current * tan(deg_to_rad(11.25)), layer_colors[layer_id])
-	draw_arc(Vector2.ZERO, length_current / 2, deg_to_rad(156.5), deg_to_rad(203.5), 32, layer_colors[gVariables.current_layer_id].darkened(.5), length_current, true)
+	#draw_circle(Vector2(-length_current, 0), length_current * tan(deg_to_rad(22.5)), layer_colors[gVariables.current_layer_id].darkened(.6))
+	draw_arc(Vector2.ZERO, length_current / 2, deg_to_rad(156.5), deg_to_rad(203.5), 32, layer_colors[gVariables.current_layer_id].darkened(.6), length_current, true)
+	draw_set_transform(Vector2.ZERO, deg_to_rad(180))
+	match ui_type:
+		UI_TYPES.back:
+			draw_string(font, Vector2(length_current / 2, 0), "Back")
+		UI_TYPES.reset:
+			draw_string(font, Vector2(length_current / 2, 0), "Reset")
+	draw_set_transform(Vector2.ZERO, deg_to_rad(0))
 
 
 # helper functions --------------------------------------------------------------------------------------------------------

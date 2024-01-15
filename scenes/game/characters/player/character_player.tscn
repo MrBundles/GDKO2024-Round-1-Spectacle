@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b4y7cipya3vxn"]
+[gd_scene load_steps=4 format=3 uid="uid://b4y7cipya3vxn"]
 
 [ext_resource type="Script" path="res://scenes/game/characters/player/character_player.gd" id="1_ow0hn"]
-[ext_resource type="AudioStream" uid="uid://dmo8abrcwumab" path="res://assets/audio/sfx/slimy_slide/slimy_slide.wav" id="2_q86v5"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_wj6bs"]
 points = PackedVector2Array(31, 31, -31, 31, -31, -15, -15, -31, 15, -31, 31, -15)
@@ -37,7 +36,6 @@ collision_mask = 16
 shape = SubResource("CircleShape2D_62y68")
 
 [node name="SlimeSlide" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_q86v5")
 pitch_scale = 2.0
 autoplay = true
 panning_strength = 3.0
