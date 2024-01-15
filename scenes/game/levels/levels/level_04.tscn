@@ -4,16 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://25yfrkohbin5" path="res://scenes/game/objects/portal/object_portal.tscn" id="2_o4wlt"]
 [ext_resource type="PackedScene" uid="uid://dbk8lnjfbuqyp" path="res://scenes/game/characters/baby/character_baby.tscn" id="3_uvg6v"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_e5kkg"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_wg0lv"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_7048a"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_3fdeg"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_bj0gi"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_wmj8c"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_xxx1u"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_vb7ih"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Level04" instance=ExtResource("1_43qcf")]
@@ -112,16 +112,16 @@ collision_mask = 64
 layer_id = 3
 
 [node name="TextureRectLayer1" parent="Layers" index="0"]
-texture = SubResource("ViewportTexture_e5kkg")
+texture = SubResource("ViewportTexture_wg0lv")
 
 [node name="TextureRectLayer2" parent="Layers" index="1"]
-texture = SubResource("ViewportTexture_7048a")
+texture = SubResource("ViewportTexture_3fdeg")
 
 [node name="TextureRectLayer3" parent="Layers" index="2"]
-texture = SubResource("ViewportTexture_bj0gi")
+texture = SubResource("ViewportTexture_wmj8c")
 
 [node name="TextureRectLayer4" parent="Layers" index="3"]
-texture = SubResource("ViewportTexture_xxx1u")
+texture = SubResource("ViewportTexture_vb7ih")
 
 [node name="SpectacleSelectWheel" parent="." index="7"]
 layer_4_enable = false

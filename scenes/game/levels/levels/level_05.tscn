@@ -14,16 +14,16 @@ font_size = 40
 font = ExtResource("2_rfdn0")
 font_size = 32
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_4y3x3"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_m214h"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_qquh1"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_pvtqj"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_gwoyp"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_fv01w"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_wqiye"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_yod7v"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Level05" instance=ExtResource("1_5t38x")]
@@ -144,16 +144,16 @@ position = Vector2(992, 768)
 collision_mask = 16
 
 [node name="TextureRectLayer1" parent="Layers" index="0"]
-texture = SubResource("ViewportTexture_4y3x3")
+texture = SubResource("ViewportTexture_m214h")
 
 [node name="TextureRectLayer2" parent="Layers" index="1"]
-texture = SubResource("ViewportTexture_qquh1")
+texture = SubResource("ViewportTexture_pvtqj")
 
 [node name="TextureRectLayer3" parent="Layers" index="2"]
-texture = SubResource("ViewportTexture_gwoyp")
+texture = SubResource("ViewportTexture_fv01w")
 
 [node name="TextureRectLayer4" parent="Layers" index="3"]
-texture = SubResource("ViewportTexture_wqiye")
+texture = SubResource("ViewportTexture_yod7v")
 
 [node name="SpectacleSelectWheel" parent="." index="7"]
 visible = false

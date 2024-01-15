@@ -29,6 +29,7 @@ window/stretch/mode="canvas_items"
 
 [editor]
 
+movie_writer/movie_file="C:/Users/Kevin Wagner/Pictures/Movies/Godot Movie Exports/recent.avi"
 script/templates_search_path="res://assets/code/script_templates"
 
 [input]

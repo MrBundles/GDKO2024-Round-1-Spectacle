@@ -43,16 +43,16 @@ font_size = 32
 font = ExtResource("2_gixtb")
 font_size = 64
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_db1vc"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_e0gm4"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ahvcd"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_2m110"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_hw52r"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_gx2n5"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_np1y6"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_w6niy"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Level00" instance=ExtResource("1_0gq4t")]
@@ -389,16 +389,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TextureRectLayer1" parent="Layers" index="0"]
-texture = SubResource("ViewportTexture_db1vc")
+texture = SubResource("ViewportTexture_e0gm4")
 
 [node name="TextureRectLayer2" parent="Layers" index="1"]
-texture = SubResource("ViewportTexture_ahvcd")
+texture = SubResource("ViewportTexture_2m110")
 
 [node name="TextureRectLayer3" parent="Layers" index="2"]
-texture = SubResource("ViewportTexture_hw52r")
+texture = SubResource("ViewportTexture_gx2n5")
 
 [node name="TextureRectLayer4" parent="Layers" index="3"]
-texture = SubResource("ViewportTexture_np1y6")
+texture = SubResource("ViewportTexture_w6niy")
 
 [node name="UIWheel" parent="." index="8"]
 visible = false

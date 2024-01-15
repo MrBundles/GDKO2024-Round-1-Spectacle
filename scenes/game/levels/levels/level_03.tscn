@@ -4,16 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://dbk8lnjfbuqyp" path="res://scenes/game/characters/baby/character_baby.tscn" id="2_hgqse"]
 [ext_resource type="PackedScene" uid="uid://25yfrkohbin5" path="res://scenes/game/objects/portal/object_portal.tscn" id="3_gka20"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_iwr1y"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_lvpsm"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_cn6b4"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_nsame"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_lv7cg"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_45bky"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_srdu2"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_migdo"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Level03" instance=ExtResource("1_qiejf")]
@@ -56,16 +56,16 @@ text = "Lesson 3 - Set an Example Worth Following"
 text = "Lesson 3 - Set an Example Worth Following"
 
 [node name="TextureRectLayer1" parent="Layers" index="0"]
-texture = SubResource("ViewportTexture_iwr1y")
+texture = SubResource("ViewportTexture_lvpsm")
 
 [node name="TextureRectLayer2" parent="Layers" index="1"]
-texture = SubResource("ViewportTexture_cn6b4")
+texture = SubResource("ViewportTexture_nsame")
 
 [node name="TextureRectLayer3" parent="Layers" index="2"]
-texture = SubResource("ViewportTexture_lv7cg")
+texture = SubResource("ViewportTexture_45bky")
 
 [node name="TextureRectLayer4" parent="Layers" index="3"]
-texture = SubResource("ViewportTexture_srdu2")
+texture = SubResource("ViewportTexture_migdo")
 
 [node name="SpectacleSelectWheel" parent="." index="7"]
 visible = false
